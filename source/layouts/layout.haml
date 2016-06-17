@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %meta{content: "IE=edge", 'http-equiv' => "X-UA-Compatible"}
+    %meta{charset: "utf-8"}
+    %meta{charset: "width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no", name: "viewport"}
+    %title
+      = current_page.data.title || "Hebrew Calendar"
+    = stylesheet_link_tag '//fonts.googleapis.com/css?family=Lato:300,400'
+    = stylesheet_link_tag 'http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'
+    = stylesheet_link_tag :site
+    = javascript_include_tag :all
+  %body{class: page_classes}
+    = yield

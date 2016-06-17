@@ -112,6 +112,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   middleman (>= 4.0.0)
   middleman-livereload
   middleman-sprockets (~> 4.0.0.rc.3)
