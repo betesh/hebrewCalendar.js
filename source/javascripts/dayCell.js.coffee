@@ -1,5 +1,6 @@
 //= require 'hebrewDateExtensions'
 //= require 'birthdays'
+//= require 'hachrazatTaanit'
 
 class DayCell
   constructor: (hebrewDate, rowsPerCell) ->
@@ -25,6 +26,8 @@ class DayCell
       announcement = announcement.replace(/(בְּסִימַן)/g, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$1")
       announcement = announcement.replace(/(רֹאשׁ חֹדֶשׁ) /g, "$1<br>&nbsp;&nbsp;&nbsp;&nbsp;")
       list.push "<small class='no-wrap'>#{announcement}</small>"
+    if @hebrewDate.isHachrazatTaanit()
+      list.push (new HachrazatTaanit(@hebrewDate)).announcement()
     for name, birthday of Birthdays
       if @hebrewDate.isBirthday(birthday)
         list.push "#{name}'s Birthday"
