@@ -1,5 +1,6 @@
 //= require 'hebrewDateExtensions'
 //= require 'birthdays'
+//= require 'yahrzeits'
 //= require 'hachrazatTaanit'
 
 class DayCell
@@ -31,6 +32,10 @@ class DayCell
     for name, birthday of Birthdays
       if @hebrewDate.isBirthday(birthday)
         list.push "#{name}'s Birthday"
+    for name, yahrzeit of Yahrzeits
+      for month in yahrzeit.months
+        if @hebrewDate.monthAndRangeAre(month, [yahrzeit.date])
+          list.push "<small>אַזְכָּרָה: #{name}</small>"
     if @hebrewDate.isShabbat() && @sedra()?
       list.push @sedra()
     list
