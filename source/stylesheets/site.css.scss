@@ -1,2 +1,40 @@
 @charset "utf-8";
 @import "normalize";
+
+@page
+{
+  // Got this from http://stackoverflow.com/questions/1542320/margin-while-printing-html-page:
+  size: auto;
+  margin: 5mm 5mm 5mm 5mm;
+}
+
+@media print
+{
+  .screen-only { display: none }
+  // This is needed in order for break-before to work in Chrome.
+  // See http://stackoverflow.com/a/24813258/1633753
+  .index { div { float: none !important; } }
+  .page-break-before {
+    break-before: always;
+    page-break-before: always;
+    -webkit-page-break-before: always;
+  }
+}
+
+.row table.table {
+  font-size: medium;
+  @media print {
+    font-size: small;
+  }
+  text-align: start;
+
+  tbody tr td, thead:first-child tr th {
+    border-top: 1px dashed #555;
+    border-right: 1px dashed #555;
+    border-bottom: 1px dashed #555;
+  }
+
+  td:first-child,  th:first-child {
+    border-left: 1px dashed #555;
+  }
+}
