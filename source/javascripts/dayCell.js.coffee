@@ -18,6 +18,13 @@ class DayCell
       list.push "<small class='no-wrap'>Tonight: #{@hebrewDate.omer().tonight} לָעֹמֶר</small>"
       if 49 == @hebrewDate.omer().tonight
         list.push "<small class='no-wrap'>&nbsp;&nbsp;&nbsp;&nbsp;(Skip פְּסוּקִים in לְשֵׁם יִחוּד that mention 49)</small>"
+    if @hebrewDate.isShabbatMevarechim()
+      hachrazatRoshHodesh = new HachrazatRoshChodesh(@hebrewDate)
+      announcement = "#{hachrazatRoshHodesh.moladAnnouncement()}<br>#{hachrazatRoshHodesh.sephardicAnnouncement()}"
+      announcement = announcement.replace(/(will be on) /g, "$1<br>&nbsp;&nbsp;&nbsp;&nbsp;")
+      announcement = announcement.replace(/(בְּסִימַן)/g, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$1")
+      announcement = announcement.replace(/(רֹאשׁ חֹדֶשׁ) /g, "$1<br>&nbsp;&nbsp;&nbsp;&nbsp;")
+      list.push "<small class='no-wrap'>#{announcement}</small>"
     for name, birthday of Birthdays
       if @hebrewDate.isBirthday(birthday)
         list.push "#{name}'s Birthday"
