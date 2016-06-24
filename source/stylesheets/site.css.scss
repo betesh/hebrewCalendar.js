@@ -19,6 +19,9 @@
     page-break-before: always;
     -webkit-page-break-before: always;
   }
+  .no-wrap {
+    white-space: nowrap;
+  }
 }
 
 .row table.table {

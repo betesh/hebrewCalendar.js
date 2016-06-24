@@ -14,6 +14,10 @@ class DayCell
   gregorianDescription: -> @_gregorianDescription ?= moment(@hebrewDate.gregorianDate).format("D MMMM")
   eventList: -> @_eventList ?= (
     list = []
+    if @hebrewDate.omer()?.tonight?
+      list.push "<small class='no-wrap'>Tonight: #{@hebrewDate.omer().tonight} לָעֹמֶר</small>"
+      if 49 == @hebrewDate.omer().tonight
+        list.push "<small class='no-wrap'>&nbsp;&nbsp;&nbsp;&nbsp;(Skip פְּסוּקִים in לְשֵׁם יִחוּד that mention 49)</small>"
     for name, birthday of Birthdays
       if @hebrewDate.isBirthday(birthday)
         list.push "#{name}'s Birthday"
