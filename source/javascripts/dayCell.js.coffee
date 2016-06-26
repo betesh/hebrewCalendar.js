@@ -1,3 +1,6 @@
+//= require 'hebrewDateExtensions'
+//= require 'birthdays'
+
 class DayCell
   constructor: (hebrewDate, rowsPerCell) ->
     @hebrewDate = hebrewDate
@@ -11,6 +14,9 @@ class DayCell
   gregorianDescription: -> @_gregorianDescription ?= moment(@hebrewDate.gregorianDate).format("D MMMM")
   eventList: -> @_eventList ?= (
     list = []
+    for name, birthday of Birthdays
+      if @hebrewDate.isBirthday(birthday)
+        list.push "#{name}'s Birthday"
     if @hebrewDate.isShabbat() && @sedra()?
       list.push @sedra()
     list
