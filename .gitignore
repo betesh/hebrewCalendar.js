@@ -16,5 +16,6 @@
 
 # Ignore .DS_store file
 .DS_Store
+anniversary.js.coffee
 birthdays.js.coffee
 yahrzeits.js.coffee

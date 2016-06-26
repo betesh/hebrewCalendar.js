@@ -1,4 +1,5 @@
 //= require 'hebrewDateExtensions'
+//= require 'anniversary'
 //= require 'birthdays'
 //= require 'yahrzeits'
 //= require 'hachrazatTaanit'
@@ -29,6 +30,8 @@ class DayCell
       list.push "<small class='no-wrap'>#{announcement}</small>"
     if @hebrewDate.isHachrazatTaanit()
       list.push (new HachrazatTaanit(@hebrewDate)).announcement()
+    if @hebrewDate.isAnniversary()
+      list.push "Anniversay"
     for name, birthday of Birthdays
       if @hebrewDate.isBirthday(birthday)
         list.push "#{name}'s Birthday"
