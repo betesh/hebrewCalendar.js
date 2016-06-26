@@ -1,3 +1,4 @@
+//= require 'hebrewEvents'
 //= require 'hebrewDateExtensions'
 //= require 'anniversary'
 //= require 'birthdays'
@@ -17,6 +18,8 @@ class DayCell
   gregorianDescription: -> @_gregorianDescription ?= moment(@hebrewDate.gregorianDate).format("D MMMM")
   eventList: -> @_eventList ?= (
     list = []
+    for event, name of HebrewEvents
+      list.push name if @hebrewDate["is#{event}"]()
     if @hebrewDate.omer()?.tonight?
       list.push "<small class='no-wrap'>Tonight: #{@hebrewDate.omer().tonight} לָעֹמֶר</small>"
       if 49 == @hebrewDate.omer().tonight
