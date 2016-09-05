@@ -1,7 +1,6 @@
 //= require 'hebrewCalendar'
 //= require 'dayCell'
 
-ROWS_PER_PAGE = 4
 ROWS_PER_CELL = 9
 
 Weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'שַׁבָּת']
@@ -23,8 +22,13 @@ wrappedInTable = (content) ->
     </table>
   """
 
+splitAtMiddleOfPage = (top, bottom) ->
+  "<div class='top'>#{top}</div><div class='bottom'>#{bottom}</div>"
+
 updateCalendar = ->
   selectedYear = parseInt @value
+  collate = hebrewCalendar.$collate.is(':checked')
+  rowsPerPage = if collate then 2 else 5
   hebrewDate =  new HebrewDate(new RoshHashana(selectedYear).getGregorianDate())
   blankDays = hebrewDate.gregorianDate.getDay()
   tables = []
@@ -38,7 +42,7 @@ updateCalendar = ->
     if hebrewDate.isShabbat()
       weeks += 1
       html += "</tr>"
-      if (0 == weeks % ROWS_PER_PAGE)
+      if (0 == weeks % rowsPerPage)
         tables.push wrappedInTable(html)
         html = ""
       html += "<tr>"
@@ -47,8 +51,23 @@ updateCalendar = ->
   while blankDays--
     html += "<td></td>"
   html += "</tr>"
-  tables.push wrappedInTable(html)
-  $('#calendar').html tables.join(dividerRow())
+  html = wrappedInTable(html)
+  if collate
+    weeks += 1
+    while (weeks % rowsPerPage)
+      weeks += 1
+      html += "<br>".repeat ROWS_PER_CELL
+    tables.push html
+    collatedTables = []
+    while (tables.length % 4)
+      tables.push "<br>".repeat (ROWS_PER_CELL * 2 - 1)
+    while (tables.length)
+      collatedTables.push splitAtMiddleOfPage(tables.pop(), tables.shift())
+      collatedTables.push splitAtMiddleOfPage(tables.shift(), tables.pop())
+    $('#calendar').html collatedTables.join(dividerRow())
+  else
+    tables.push html
+    $('#calendar').html tables.join(dividerRow())
 
 $ ->
   window.hebrewCalendar = new HebrewCalendar(updateCalendar)

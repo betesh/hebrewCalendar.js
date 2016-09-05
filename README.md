@@ -28,6 +28,9 @@ This is my solution.
 
 4. Print it!
 
+    If you're printing it as a booklet, print it portrait, with the flip along the short edge.
+    Then fold it along the center and staple on the fold.
+
 5. Come back next year and print it again.
 
 ### Customization
