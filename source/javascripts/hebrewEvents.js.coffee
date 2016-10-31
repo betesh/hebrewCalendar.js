@@ -1,8 +1,6 @@
 HebrewEvents =
-  BedikatHames: "Tonight: בְּדִיקַת חָמֵץ"
   BeginTalUmatar: "Begin טַל וּמָטָר<br>&nbsp;&nbsp;&nbsp;&nbsp;at עַרְבִית"
   BirkatHaIlanot: "בִּרְכַּת הָאִילָנוֹת (two trees)"
-  BiurHames: "בִּעוּר חָמֵץ"
   EighthDayOfPesach: "<small>אַחֲרוֹן שֶׁל פֶּסַח</small>"
   ErebKippur: "כַּפָּרוֹת"
   ErebPurim: "קְרִיאַת הַמְגִּילִָה"
@@ -15,7 +13,6 @@ HebrewEvents =
   FirstYomTobOfSukkot: "יוֹם טוֹב רִאשׁוֹן שֶׁל סֻּכּוֹת"
   Hanuka: "חֲנֻכַּה"
   HataratNedarim: "הָתַּרָת נְדָרים"
-  KalHamira: "כָּל חֲמִירָא"
   LagLaomer: "ל``ג לָעֹמֶר"
   MaharHodesh: "מָחָר חֹדֶשׁ"
   Moed: "חוֹל הַמוֹעֵד"

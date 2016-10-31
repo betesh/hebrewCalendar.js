@@ -4,12 +4,14 @@
 //= require 'birthdays'
 //= require 'yahrzeits'
 //= require 'hachrazatTaanit'
+//= require 'zmanim/zmanim'
 
 class DayCell
-  constructor: (hebrewDate, rowsPerCell, showLessDetailedEvents) ->
+  constructor: (hebrewDate, rowsPerCell, showLessDetailedEvents, coordinates) ->
     @hebrewDate = hebrewDate
     @rowsPerCell = rowsPerCell
     @showLessDetailedEvents = showLessDetailedEvents
+    @coordinates = coordinates
   sedra: -> @_sedra ?= (
     if @hebrewDate.isShabbat()
       unless @hebrewDate.isRegel() || @hebrewDate.isYomKippur() || @hebrewDate.isYomTob()
@@ -50,13 +52,40 @@ class DayCell
           list.push "<small>אַזְכָּרָה: #{name}</small>"
     if @hebrewDate.isShabbat() && @sedra()?
       list.push @sedra()
+    zmanim = new Zmanim(@hebrewDate.gregorianDate, @coordinates)
+    if @hebrewDate.isEreb9Ab()
+      list.push "<small>Fast begins: </small>#{zmanim.sunset().seconds(0).format('h:mm')}"
+    if @hebrewDate.is9Ab()
+      list.push "<small>חֲצוֹת: </small>#{zmanim.chatzot().seconds(60).format('h:mm')}"
+      list.push "<small>Fast ends: </small>#{zmanim.setHaKochabim3Stars().seconds(60).format('h:mm')}#{if 0 == @hebrewDate.gregorianDate.getDay() then " <small><br>(Say הַבְדָלָה before eating)</small>" else ""}"
+    # if @hebrewDate.isBedikatHames()
+    if @hebrewDate.isErebPesach()
+      list.push "<small>Stop eating חָמֵץ before </small>#{zmanim.latestTimeToEatHametz().seconds(0).format('h:mm')}"
+      if @hebrewDate.isShabbat()
+        list.push "<small>Say כָּל חֲמִירָא before </small>#{zmanim.latestTimeToOwnHametz().seconds(0).format('h:mm')}"
+    if @hebrewDate.isBedikatHames()
+      list.push "<small>בְּדִיקַת חָמֵץ after:</small>#{zmanim.setHaKochabim3Stars().seconds(60).format('h:mm')}"
+    if @hebrewDate.isBiurHames()
+      list.push "<small>Destroy #{if @hebrewDate.isErebPesach() then "all" else ""} חָמֵץ before </small>#{zmanim.latestTimeToOwnHametz().seconds(0).format('h:mm')}"
+    if @hebrewDate.isShabbat() && (@hebrewDate.tonightIsYomTob())
+      list.push "<small>Start 'סְעוּדַת ג before </small>#{zmanim.samuchLeminchaKetana().seconds(0).format('h:mm')}"
+    if zmanim.hadlakatNerot()?
+      list.push "<small>הַדְלַקָת נֵרות: </small>#{zmanim.hadlakatNerot()}"
+    if (@hebrewDate.is2ndDayOfYomTob() && !@hebrewDate.isErebShabbat()) || @hebrewDate.isShabbat() || @hebrewDate.isYomKippur()
+      list.push "<small>זְמַן מְלָאכָה: </small>#{zmanim.setHaKochabim3Stars().seconds(60).format('h:mm')}"
+    if @hebrewDate.isErebPesach() || @hebrewDate.is1stDayOfPesach()
+      list.push "<small>חֲצוֹת: </small>#{zmanim.chatzot().seconds(0).format('h:mm')}"
     list
   )
   content: ->
     events = @eventList().join("<br>")
     newLines = events.match(/<br>/g)?.length ? 0
     placeholderCount = @rowsPerCell - 2 - newLines
-    placeholders = "<br>".repeat placeholderCount
+    try
+      placeholders = "<br>".repeat placeholderCount
+    catch RangeError
+      alert "#{newLines + 1} rows of events for #{@gregorianDescription()}"
+      placeholders = ""
     """
       <td>
         #{placeholders}

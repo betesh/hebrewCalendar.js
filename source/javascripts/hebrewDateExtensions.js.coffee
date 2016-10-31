@@ -1,3 +1,5 @@
+HebrewDate.prototype.hasHadlakatNerot = -> @isErebShabbat() || @isErebYomTob() || @isErebYomKippur()
+HebrewDate.prototype.hasHadlakatNerotAfterSetHaKochabim = -> (@isErebYomTob() && @isShabbat()) || (@is1stDayOfYomTob() && !@isErebShabbat())
 HebrewDate.prototype.isBedikatHames = ->
   (5 != @gregorianDate.getDay() && @monthAndRangeAre('NISAN', [13])) ||
   (4 == @gregorianDate.getDay() && @monthAndRangeAre('NISAN', [12]))
@@ -32,3 +34,4 @@ HebrewDate.prototype.isTefillatHaParnasa = -> 2 == @gregorianDate.getDay() && "×
 HebrewDate.prototype.isTenthOfTebet = HebrewDate.prototype.is10Tevet
 HebrewDate.prototype.isUshpizin = -> @monthAndRangeAre('TISHRI', [14..20])
 HebrewDate.prototype.isZecherLeMahasitHaSheqel = HebrewDate.prototype.isTaanitEster
+HebrewDate.prototype.tonightIsYomTob = -> @isErebYomTob() || @is1stDayOfYomTob()
