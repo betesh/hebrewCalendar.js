@@ -4,13 +4,12 @@ HebrewEvents =
   BirkatHaIlanot: "בִּרְכַּת הָאִילָנוֹת (two trees)"
   BiurHames: "בִּעוּר חָמֵץ"
   EighthDayOfPesach: "<small>אַחֲרוֹן שֶׁל פֶּסַח</small>"
-  ErebRoshHashana: "Fast until מִנְחָה"
   ErebKippur: "כַּפָּרוֹת"
   ErebPurim: "קְרִיאַת הַמְגִּילִָה"
-  ErebShabuot: "תִּקוּן לֵיל שָׁבֻעֹת<br>&nbsp;&nbsp;&nbsp;&nbsp;<small class='no-wrap'>(Bring lense solution and a towel)</small>"
+  ErebShabuot: "תִּקוּן לֵיל שָׁבֻעֹת"
   ErubTabshilin: "עֵרוּב תַּבְשִׁלִין"
   FastOfGedaliah: "צוֹם גְּדַלְיָה"
-  FirstDayOfPesach: "תִּקוּן הַטַּל<br>Tonight: קְצִירַת הָעֹמֶר"
+  FirstDayOfPesach: "תִּקוּן הַטַּל"
   FirstDayOfSheminiAseret: "שְּׁמִינִי עֲצֶרֶת<br>תִּקוּן גֶשֶׁם"
   FirstYomTobOfPesach: "יוֹם טוֹב רִאשׁוֹן שֶׁל פֶּסַח"
   FirstYomTobOfSukkot: "יוֹם טוֹב רִאשׁוֹן שֶׁל סֻּכּוֹת"
@@ -27,8 +26,6 @@ HebrewEvents =
   PurimKatan: "פּוּרִים קָטָן"
   FirstDayOfRoshHashana: "רֹאשׁ הַשָּׁנָה<br>תַּשְׁלְיךְ"
   SecondDayOfRoshHashana: "רֹאשׁ הַשָּׁנָה"
-  SixthDayOfPesach: "<small>Tonight: תִּקוּן לֵיל<br>&nbsp;&nbsp;&nbsp;&nbsp;שְׁבִיעִי שֶׁל פֶּסַח</small>"
-  SixthDayOfSukkot: "Tonight: תִּקוּן לֵיל<br>&nbsp;&nbsp;&nbsp;&nbsp;הוֹשַׁעֲנָא רַבָּא"
   RoshHodesh: "רֹאשׁ חֹדֶשׁ"
   SeventeenthOfTamuz: "שִׁבְעָה עֲשָׂר בְּתַּמוּז"
   SeventhDayOfPesach: "שְׁבִיעִי שֶׁל פֶּסַח"
@@ -53,4 +50,12 @@ HebrewEvents =
   Ushpizin: "Tonight: אוּשְׁפִּיזִּין"
   YomKippur: "יוֹם הַכִּפֻּרִים"
 
+DetailedHebrewEvents =
+  ErebRoshHashana: "Fast until מִנְחָה"
+  ErebShabuot: "תִּקוּן לֵיל שָׁבֻעֹת<br>&nbsp;&nbsp;&nbsp;&nbsp;<small class='no-wrap'>(Bring lense solution and a towel)</small>"
+  FirstDayOfPesach: "תִּקוּן הַטַּל<br>Tonight: קְצִירַת הָעֹמֶר"
+  SixthDayOfPesach: "<small>Tonight: תִּקוּן לֵיל<br>&nbsp;&nbsp;&nbsp;&nbsp;שְׁבִיעִי שֶׁל פֶּסַח</small>"
+  SixthDayOfSukkot: "Tonight: תִּקוּן לֵיל<br>&nbsp;&nbsp;&nbsp;&nbsp;הוֹשַׁעֲנָא רַבָּא"
+
 (exports ? this).HebrewEvents = HebrewEvents
+(exports ? this).DetailedHebrewEvents = DetailedHebrewEvents

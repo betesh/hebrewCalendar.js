@@ -29,6 +29,7 @@ splitAtMiddleOfPage = (top, bottom) ->
 updateCalendar = ->
   selectedYear = parseInt @value
   collate = hebrewCalendar.$collate.is(':checked')
+  showLessDetailedEvents = hebrewCalendar.$lessDetailedEvents.is(':checked')
   hebrewDate =  new HebrewDate(new RoshHashana(selectedYear).getGregorianDate())
   blankDays = hebrewDate.gregorianDate.getDay()
   tables = []
@@ -37,7 +38,7 @@ updateCalendar = ->
     html += "<td></td>"
   weeks = 0
   while hebrewDate.getYearFromCreation() == selectedYear
-    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL)
+    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL, showLessDetailedEvents)
     html += dayCell.content()
     if hebrewDate.isShabbat()
       weeks += 1

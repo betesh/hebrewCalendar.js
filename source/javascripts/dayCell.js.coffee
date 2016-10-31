@@ -6,9 +6,10 @@
 //= require 'hachrazatTaanit'
 
 class DayCell
-  constructor: (hebrewDate, rowsPerCell) ->
+  constructor: (hebrewDate, rowsPerCell, showLessDetailedEvents) ->
     @hebrewDate = hebrewDate
     @rowsPerCell = rowsPerCell
+    @showLessDetailedEvents = showLessDetailedEvents
   sedra: -> @_sedra ?= (
     if @hebrewDate.isShabbat()
       unless @hebrewDate.isRegel() || @hebrewDate.isYomKippur() || @hebrewDate.isYomTob()
@@ -18,20 +19,25 @@ class DayCell
   gregorianDescription: -> @_gregorianDescription ?= moment(@hebrewDate.gregorianDate).format("D MMMM")
   eventList: -> @_eventList ?= (
     list = []
-    for event, name of HebrewEvents
+    events = $.extend({}, HebrewEvents)
+    events = $.extend(events, DetailedHebrewEvents) unless @showLessDetailedEvents
+    for event, name of events
       list.push name if @hebrewDate["is#{event}"]()
     if @hebrewDate.omer()?.tonight?
       list.push "<small class='no-wrap'>Tonight: #{@hebrewDate.omer().tonight} לָעֹמֶר</small>"
-      if 49 == @hebrewDate.omer().tonight
+      if !@showLessDetailedEvents && 49 == @hebrewDate.omer().tonight
         list.push "<small class='no-wrap'>&nbsp;&nbsp;&nbsp;&nbsp;(Skip פְּסוּקִים in לְשֵׁם יִחוּד that mention 49)</small>"
     if @hebrewDate.isShabbatMevarechim()
-      hachrazatRoshHodesh = new HachrazatRoshChodesh(@hebrewDate)
-      announcement = "#{hachrazatRoshHodesh.moladAnnouncement()}<br>#{hachrazatRoshHodesh.sephardicAnnouncement()}"
-      announcement = announcement.replace(/(will be on) /g, "$1<br>&nbsp;&nbsp;&nbsp;&nbsp;")
-      announcement = announcement.replace(/(בְּסִימַן)/g, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$1")
-      announcement = announcement.replace(/(רֹאשׁ חֹדֶשׁ) /g, "$1<br>&nbsp;&nbsp;&nbsp;&nbsp;")
-      list.push "<small class='no-wrap'>#{announcement}</small>"
-    if @hebrewDate.isHachrazatTaanit()
+      if @showLessDetailedEvents
+        list.push "שַׁבָּת מְבָרְכִים"
+      else
+        hachrazatRoshHodesh = new HachrazatRoshChodesh(@hebrewDate)
+        announcement = "#{hachrazatRoshHodesh.moladAnnouncement()}<br>#{hachrazatRoshHodesh.sephardicAnnouncement()}"
+        announcement = announcement.replace(/(will be on) /g, "$1<br>&nbsp;&nbsp;&nbsp;&nbsp;")
+        announcement = announcement.replace(/(בְּסִימַן)/g, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$1")
+        announcement = announcement.replace(/(רֹאשׁ חֹדֶשׁ) /g, "$1<br>&nbsp;&nbsp;&nbsp;&nbsp;")
+        list.push "<small class='no-wrap'>#{announcement}</small>"
+    if !@showLessDetailedEvents && @hebrewDate.isHachrazatTaanit()
       list.push (new HachrazatTaanit(@hebrewDate)).announcement()
     if @hebrewDate.isAnniversary()
       list.push "Anniversay"
