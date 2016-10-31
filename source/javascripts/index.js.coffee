@@ -1,6 +1,7 @@
 //= require 'hebrewCalendar'
 //= require 'dayCell'
 
+ROWS_PER_PAGE = 2
 ROWS_PER_CELL = 9
 
 Weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'שַׁבָּת']
@@ -14,10 +15,10 @@ headerRow = -> "<tr>#{("<th>#{day}</th>" for day in Weekdays).join('')}</tr>"
 
 dividerRow = -> "<p class='page-break-before'>&nbsp;</p>"
 
-wrappedInTable = (content) ->
+wrappedInTable = (content, collate) ->
   """
     <table class='table table-striped table-condensed'>
-      <thead>#{headerRow()}</thead>
+      <#{if collate then "tbody class='thead'" else "thead"}>#{headerRow()}</thead>
       <tbody>#{content}</tbody>
     </table>
   """
@@ -28,7 +29,6 @@ splitAtMiddleOfPage = (top, bottom) ->
 updateCalendar = ->
   selectedYear = parseInt @value
   collate = hebrewCalendar.$collate.is(':checked')
-  rowsPerPage = if collate then 2 else 5
   hebrewDate =  new HebrewDate(new RoshHashana(selectedYear).getGregorianDate())
   blankDays = hebrewDate.gregorianDate.getDay()
   tables = []
@@ -42,8 +42,8 @@ updateCalendar = ->
     if hebrewDate.isShabbat()
       weeks += 1
       html += "</tr>"
-      if (0 == weeks % rowsPerPage)
-        tables.push wrappedInTable(html)
+      if collate && 0 == (weeks % ROWS_PER_PAGE)
+        tables.push wrappedInTable(html, collate)
         html = ""
       html += "<tr>"
     hebrewDate = advance(hebrewDate)
@@ -51,10 +51,10 @@ updateCalendar = ->
   while blankDays--
     html += "<td></td>"
   html += "</tr>"
-  html = wrappedInTable(html)
+  html = wrappedInTable(html, collate)
   if collate
     weeks += 1
-    while (weeks % rowsPerPage)
+    while (weeks % ROWS_PER_PAGE)
       weeks += 1
       html += "<br>".repeat ROWS_PER_CELL
     tables.push html
