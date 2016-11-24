@@ -30,7 +30,7 @@ class Zmanim
   latestTimeToEatHametz: -> @_latestTimeToEatHametz ?= @shaaZemaniMagenAbraham(4)
   latestTimeToOwnHametz: -> @_latestTimeToOwnHametz ?= @shaaZemaniMagenAbraham(5)
   chatzot: -> @_chatzot ?= moment(@zmanim.solarNoon)
-  samuchLeminchaKetana: -> @_samuchLeminchaKetana ?= @shaaZemaniMagenAbraham(9)
+  samuchLeminchaKetana: -> @_samuchLeminchaKetana ?= @shaaZemaniGra(9)
   plag: -> @_plag ?= @shaaZemaniGra(10.75)
   hadlakatNerot: -> @_hadlakatNerot ?= (
     hebrewDate = new HebrewDate(@gregorianDate)
