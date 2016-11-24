@@ -26,10 +26,13 @@ class Zmanim
     shaaZemani(beginningOfDay, lengthOfDay, hour)
   shaaZemaniMagenAbraham: (hour) -> moment.min(@shaaZemaniMagenAbrahamDegrees(hour), @shaaZemaniMagenAbrahamFixedMinutes(hour))
   magenAbrahamDawn: -> @_magenAbrahamDawn ?= moment(@zmanim.magenAbrahamDawn)
+  earliestTallit: -> @_earliestTallit ?= moment(@zmanim.earliestTallit)
   sunrise: -> @_sunrise ?= moment(@zmanim.sunrise)
+  sofZmanKeriatShema: -> @_sofZmanKeriatShema ?= @shaaZemaniMagenAbraham(3)
   latestTimeToEatHametz: -> @_latestTimeToEatHametz ?= @shaaZemaniMagenAbraham(4)
   latestTimeToOwnHametz: -> @_latestTimeToOwnHametz ?= @shaaZemaniMagenAbraham(5)
   chatzot: -> @_chatzot ?= moment(@zmanim.solarNoon)
+  earliestMincha: -> @_earliestMincha ?= @shaaZemaniMagenAbraham(6.5)
   samuchLeminchaKetana: -> @_samuchLeminchaKetana ?= @shaaZemaniGra(9)
   plag: -> @_plag ?= @shaaZemaniGra(10.75)
   hadlakatNerot: -> @_hadlakatNerot ?= (

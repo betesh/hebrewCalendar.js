@@ -5,6 +5,7 @@
 //= require 'yahrzeits'
 //= require 'hachrazatTaanit'
 //= require 'zmanim/zmanim'
+//= require 'zmanim/sunrise'
 
 class DayCell
   constructor: (hebrewDate, rowsPerCell, showLessDetailedEvents, coordinates) ->
