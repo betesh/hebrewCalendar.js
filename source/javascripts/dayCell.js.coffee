@@ -8,10 +8,11 @@
 //= require 'zmanim/sunrise'
 
 class DayCell
-  constructor: (hebrewDate, rowsPerCell, showLessDetailedEvents, coordinates) ->
+  constructor: (hebrewDate, rowsPerCell, showLessDetailedEvents, zmanimOnly, coordinates) ->
     @hebrewDate = hebrewDate
     @rowsPerCell = rowsPerCell
     @showLessDetailedEvents = showLessDetailedEvents
+    @zmanimOnly = zmanimOnly
     @coordinates = coordinates
   sedra: -> @_sedra ?= (
     if @hebrewDate.isShabbat()
@@ -78,8 +79,53 @@ class DayCell
       list.push "<small>חֲצוֹת: </small>#{zmanim.chatzot().seconds(0).format('h:mm')}"
     list
   )
+  zmanimList: -> @_zmanimList ?= (
+    zmanim = new Zmanim(@hebrewDate.gregorianDate, @coordinates)
+    list = []
+    alotHaShahar = zmanim.magenAbrahamDawn().format("h:mm:ss")
+    list.push("עֲהַ\"שַּׁ: #{alotHaShahar}")
+    misheyakir = zmanim.earliestTallit().seconds(60).format("h:mm")
+    list.push("מִשֶּׁיַכִּיר: #{misheyakir}")
+    sunrise = (new Sunrise(@hebrewDate)?.time() ? zmanim.sunrise()).format("h:mm:ss")
+    list.push("עֲמִידָה: #{sunrise}")
+    sofZmanKeriatShema = zmanim.sofZmanKeriatShema().seconds(0).format("h:mm")
+    list.push("סזק\"שׁ: #{sofZmanKeriatShema}")
+    sofZmanTefila = zmanim.shaaZemaniMagenAbrahamDegrees(4).seconds(0).format("h:mm")
+    list.push("סזי\"ח: #{sofZmanTefila}")
+    if @hebrewDate.isErebPesach() || @hebrewDate.isBiurHames()
+      fifthHour = zmanim.shaaZemaniMagenAbrahamDegrees(5).seconds(0).format("h:mm")
+      list.push("חָמֵץ: #{fifthHour}")
+    chatzot = zmanim.chatzot().seconds(60).format("h:mm")
+    list.push("חֲצוֹת: #{chatzot}")
+    earliestMincha = zmanim.earliestMincha().seconds(60).format("h:mm")
+    list.push("מ\"ג: #{earliestMincha}")
+    if (@hebrewDate.isErebShabbat() && !@hebrewDate.is10Tevet()) || @hebrewDate.isErebYomTob() || @hebrewDate.is1stDayOfYomTob()
+      samuchLeminchaKetana = zmanim.samuchLeminchaKetana().seconds(0).format("h:mm")
+      list.push("סז\"ס: #{samuchLeminchaKetana}")
+    if (@hebrewDate.isErebShabbat() || @hebrewDate.isErebYomKippur() || @hebrewDate.isErebYomTob()) && !@hebrewDate.isShabbat() && !@hebrewDate.isYomTob()
+      minchaKetana = zmanim.shaaZemaniGra(9.5).seconds(0).format("h:mm")
+      list.push("סס\"ב: #{minchaKetana}")
+    if (!@hebrewDate.isShabbat() && !@hebrewDate.isYomKippur() && !@hebrewDate.isErebYomKippur() && !@hebrewDate.isErebYomTob() && !@hebrewDate.isYomTob()) || @hebrewDate.is6thDayOfPesach() || (@hebrewDate.yomYobThatWePrayAtPlag() && !@hebrewDate.isShabbat())
+      plag = zmanim.plag().seconds(60).format("h:mm")
+      list.push("פלג: #{plag}")
+    sunset = zmanim.sunset().seconds(0).format("h:mm")
+    list.push("שְׁקִיעָה: #{sunset}")
+    if @hebrewDate.isTaanit() || @hebrewDate.omer()?.tonight? || @hebrewDate.hasHadlakatNerotHanukah() || @hebrewDate.isErebPurim()
+      setHaKochabimGeonim = zmanim.setHaKochabimGeonim().seconds(60).format("h:mm")
+      list.push("צהכ\"ג: #{setHaKochabimGeonim}")
+    setHaKochabim3Stars = zmanim.setHaKochabim3Stars().seconds(60).format("h:mm")
+    list.push("צה\"כ: #{setHaKochabim3Stars}")
+    if @hebrewDate.isShabbat() || @hebrewDate.isYomKippur()
+      rabbenuTam = moment(zmanim.sunset()).add(72, 'minutes').seconds(60).format('h:mm')
+      list.push("ר\"ת: #{rabbenuTam}")
+    "<small>#{item}</small>" for item in list
+  )
   content: ->
-    events = @eventList().join("<br>")
+    if @zmanimOnly
+      events = @zmanimList().join("<br>")
+      @rowsPerCell = @rowsPerCell + 5
+    else
+      events = @eventList().join("<br>")
     newLines = events.match(/<br>/g)?.length ? 0
     placeholderCount = @rowsPerCell - 2 - newLines
     try
