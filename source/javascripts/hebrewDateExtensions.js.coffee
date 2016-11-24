@@ -38,3 +38,4 @@ HebrewDate.prototype.tonightIsYomTob = -> @isErebYomTob() || @is1stDayOfYomTob()
 HebrewDate.prototype.hasHadlakatNerotHanukah = ->
   @monthAndRangeAre('KISLEV', [24..30]) ||
   @monthAndRangeAre('TEVET', [1..(if @hebrewYear.getDaysInYear() % 10 > 3 then 1 else 2)])
+HebrewDate.prototype.yomYobThatWePrayAtPlag = -> @is7thDayOfPesach() || @is1stDayOfShabuot()
