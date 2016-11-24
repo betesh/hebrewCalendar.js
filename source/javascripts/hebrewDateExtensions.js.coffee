@@ -35,3 +35,6 @@ HebrewDate.prototype.isTenthOfTebet = HebrewDate.prototype.is10Tevet
 HebrewDate.prototype.isUshpizin = -> @monthAndRangeAre('TISHRI', [14..20])
 HebrewDate.prototype.isZecherLeMahasitHaSheqel = HebrewDate.prototype.isTaanitEster
 HebrewDate.prototype.tonightIsYomTob = -> @isErebYomTob() || @is1stDayOfYomTob()
+HebrewDate.prototype.hasHadlakatNerotHanukah = ->
+  @monthAndRangeAre('KISLEV', [24..30]) ||
+  @monthAndRangeAre('TEVET', [1..(if @hebrewYear.getDaysInYear() % 10 > 3 then 1 else 2)])
