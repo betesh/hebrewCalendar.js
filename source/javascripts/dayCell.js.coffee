@@ -31,6 +31,13 @@ class DayCell
       list.push "<small class='no-wrap'>Tonight: #{@hebrewDate.omer().tonight} לָעֹמֶר</small>"
       if !@showLessDetailedEvents && 49 == @hebrewDate.omer().tonight
         list.push "<small class='no-wrap'>&nbsp;&nbsp;&nbsp;&nbsp;(Skip פְּסוּקִים in לְשֵׁם יִחוּד that mention 49)</small>"
+    if @hebrewDate.isFirstDayOfRoshHashana() && !@showLessDetailedEvents
+      yesterday = new Date(@hebrewDate.gregorianDate)
+      yesterday.setDate(yesterday.getDate() - 1)
+      hachrazatRoshHodesh = new HachrazatRoshChodesh(new HebrewDate(yesterday))
+      announcement = hachrazatRoshHodesh.moladAnnouncement()
+      announcement = announcement.replace(/The (מוֹלַד) of חֹדֶשׁ תִּשְׁרִי will be/g, "$1")
+      list.push "<small class='no-wrap'>#{announcement}</small>"
     if @hebrewDate.isShabbatMevarechim()
       if @showLessDetailedEvents
         list.push "שַׁבָּת מְבָרְכִים"

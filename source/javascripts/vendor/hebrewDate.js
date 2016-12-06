@@ -13,6 +13,11 @@
       hebrewYear = hebrew_date.getHebrewYear();
       months = HebrewMonth.MONTHS.ofYear(hebrewYear);
       monthIndex = months.indexOf(hebrew_date.staticHebrewMonth) + 1;
+      if (months.length == monthIndex) {
+        hebrewYear = hebrew_date.getHebrewYear().getNextRoshHashana().getHebrewYear();
+        months = HebrewMonth.MONTHS.ofYear(hebrewYear);
+        monthIndex = 0;
+      }
       this.name = months[monthIndex].name;
       molad = hebrewYear.getThisRoshHashana().getMolad().advance(monthIndex);
       moladHours = molad.getHours() - 6;
