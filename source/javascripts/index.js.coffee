@@ -3,9 +3,14 @@
 
 ROWS_PER_PAGE = 2
 ROWS_PER_CELL = 9
+
 COORDINATES =
-  latitude: 39.36
-  longitude: -76.7
+  baltimore:
+    latitude: 39.36
+    longitude: -76.7
+  boston:
+    latitude: 42.346
+    longitude: -71.152
 
 Weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'שַׁבָּת']
 
@@ -42,7 +47,7 @@ updateCalendar = ->
     html += "<td></td>"
   weeks = 0
   while hebrewDate.getYearFromCreation() == selectedYear
-    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL, showLessDetailedEvents, zmanimOnly, COORDINATES)
+    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL, showLessDetailedEvents, zmanimOnly, COORDINATES.baltimore)
     html += dayCell.content()
     if hebrewDate.isShabbat()
       weeks += 1
