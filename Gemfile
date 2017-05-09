@@ -11,8 +11,10 @@ gem 'wdm', '~> 0.1.0', platforms: [:mswin, :mingw]
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 
 gem 'haml'
+gem 'mime-types'
 
 # Middleman Gems
 gem 'middleman', '>= 4.0.0'
 gem 'middleman-livereload'
 gem 'middleman-sprockets', '~> 4.0.0.rc.3'
+gem 'middleman-s3_sync'
