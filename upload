@@ -1,0 +1,5 @@
+#! /bin/bash
+
+rm -rf build
+bundle exec middleman build
+bundle exec middleman s3_sync
