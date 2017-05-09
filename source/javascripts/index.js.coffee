@@ -2,7 +2,7 @@
 //= require 'dayCell'
 
 ROWS_PER_PAGE = 2
-ROWS_PER_CELL = 9
+ROWS_PER_CELL = 3
 
 COORDINATES =
   baltimore:

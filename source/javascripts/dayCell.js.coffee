@@ -13,7 +13,7 @@ class DayCell
         @hebrewDate.sedra().replace(/-/g, ' - ')
   )
   hebrewDescription: -> @_hebrewDescription ?= "#{@hebrewDate.staticHebrewMonth.name} #{@hebrewDate.dayOfMonth}"
-  gregorianDescription: -> @_gregorianDescription ?= moment(@hebrewDate.gregorianDate).format("D MMMM")
+  gregorianDescription: -> @_gregorianDescription ?= moment(@hebrewDate.gregorianDate).format("D MMM")
   eventList: -> @_eventList ?= (
     list = []
     events = $.extend({}, HebrewEvents)
@@ -24,15 +24,24 @@ class DayCell
       if @showLessDetailedEvents
         list.push "שַׁבָּת מְבָרְכִים"
     if @hebrewDate.isShabbat() && @sedra()?
-      list.push @sedra()
+      if list.length % 2
+        temp = list.pop()
+        list.push @sedra()
+        list.push temp
+      else
+        list.push @sedra()
     list
   )
   content: ->
-    if @zmanimOnly
-      events = @zmanimList().join("<br>")
-      @rowsPerCell = @rowsPerCell + 5
-    else
-      events = @eventList().join("<br>")
+    combinedEvents = []
+    list = @eventList()
+    while list.length
+      firstEvent = "<span class='pull-right'>#{list.shift()}</span>"
+      combinedEvents.push "#{list.shift() ? ''}#{firstEvent}"
+    i = combinedEvents.indexOf "שַׁבָּת מְבָרְכִים<span class='pull-right'>בְּהַר סִינַי - בְּחֻקֹּתַי</span>"
+    if i > -1
+      combinedEvents[i] = "<span class='pull-right'>- בְּהַר סִינַי</span><br>שַׁבָּת מְבָרְכִים<span class='pull-right'>בְּחֻקֹּתַי</span>"
+    events = combinedEvents.join("<br>")
     newLines = events.match(/<br>/g)?.length ? 0
     placeholderCount = @rowsPerCell - 2 - newLines
     try
@@ -45,9 +54,9 @@ class DayCell
         #{placeholders}
         #{events}
         <br>
-        #{@hebrewDescription()}
+        _____ סְעִיף<span class='pull-right'>#{@gregorianDescription()}</span>
         <br>
-        #{@gregorianDescription()}
+        _____ סִימָן<span class='pull-right'>#{@hebrewDescription()}</span>
       </td>
     """
 
