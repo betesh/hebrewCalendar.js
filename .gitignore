@@ -19,3 +19,5 @@
 anniversary.js.coffee
 birthdays.js.coffee
 yahrzeits.js.coffee
+
+.ruby-env
