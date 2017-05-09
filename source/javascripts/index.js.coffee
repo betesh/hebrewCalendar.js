@@ -36,7 +36,7 @@ splitAtMiddleOfPage = (top, bottom) ->
 
 updateCalendar = ->
   selectedYear = parseInt @value
-  collate = hebrewCalendar.$collate.is(':checked')
+  collate = false
   showLessDetailedEvents = true
   zmanimOnly = false
   hebrewDate =  new HebrewDate(new RoshHashana(selectedYear).getGregorianDate())
