@@ -2,15 +2,8 @@ class HebrewCalendar
   constructor: (callback) ->
     @$yearSelect = $('#year-select')
     @$collate = $('#collate')
-    @$lessDetailedEvents = $('#less-detailed-events')
-    @$zmanimOnly = $('#zmanim-only')
     @$yearSelect.change(callback)
     @$collate.change => @$yearSelect.change()
-    @$lessDetailedEvents.change => @$yearSelect.change()
-    @$zmanimOnly.change =>
-      @$lessDetailedEvents.closest('div').toggle(this.checked)
-      @$collate.closest('div').toggle(this.checked)
-      @$yearSelect.change()
 
   urlYear: -> @_urlYear ?= parseInt window.location.search.replace("?", "")
 

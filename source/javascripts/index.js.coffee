@@ -36,9 +36,9 @@ splitAtMiddleOfPage = (top, bottom) ->
 
 updateCalendar = ->
   selectedYear = parseInt @value
-  collate = hebrewCalendar.$collate.is(':checked') && !hebrewCalendar.$zmanimOnly.is(':checked')
-  showLessDetailedEvents = hebrewCalendar.$lessDetailedEvents.is(':checked')
-  zmanimOnly = hebrewCalendar.$zmanimOnly.is(':checked')
+  collate = hebrewCalendar.$collate.is(':checked')
+  showLessDetailedEvents = true
+  zmanimOnly = false
   hebrewDate =  new HebrewDate(new RoshHashana(selectedYear).getGregorianDate())
   blankDays = hebrewDate.gregorianDate.getDay()
   tables = []
