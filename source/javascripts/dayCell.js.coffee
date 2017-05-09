@@ -26,10 +26,10 @@ class DayCell
     if @hebrewDate.isShabbat() && @sedra()?
       if list.length % 2
         temp = list.pop()
-        list.push @sedra()
+        list.push "<strong>#{@sedra()}</strong>"
         list.push temp
       else
-        list.push @sedra()
+        list.push "<strong>#{@sedra()}</strong>"
     list
   )
   content: ->
@@ -38,9 +38,9 @@ class DayCell
     while list.length
       firstEvent = "<span class='pull-right'>#{list.shift()}</span>"
       combinedEvents.push "#{list.shift() ? ''}#{firstEvent}"
-    i = combinedEvents.indexOf "שַׁבָּת מְבָרְכִים<span class='pull-right'>בְּהַר סִינַי - בְּחֻקֹּתַי</span>"
+    i = combinedEvents.indexOf "שַׁבָּת מְבָרְכִים<span class='pull-right'><strong>בְּהַר סִינַי - בְּחֻקֹּתַי</strong></span>"
     if i > -1
-      combinedEvents[i] = "<span class='pull-right'>- בְּהַר סִינַי</span><br>שַׁבָּת מְבָרְכִים<span class='pull-right'>בְּחֻקֹּתַי</span>"
+      combinedEvents[i] = "<span class='pull-right'><strong>- בְּהַר סִינַי</strong></span><br>שַׁבָּת מְבָרְכִים<span class='pull-right'><strong>בְּחֻקֹּתַי</strong></span>"
     events = combinedEvents.join("<br>")
     newLines = events.match(/<br>/g)?.length ? 0
     placeholderCount = @rowsPerCell - 2 - newLines
