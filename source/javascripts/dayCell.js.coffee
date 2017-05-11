@@ -26,10 +26,10 @@ class DayCell
     if @hebrewDate.isShabbat() && @sedra()?
       if list.length % 2
         temp = list.pop()
-        list.push "<strong>#{@sedra()}</strong>"
+        list.push @sedra()
         list.push temp
       else
-        list.push "<strong>#{@sedra()}</strong>"
+        list.push @sedra()
     list
   )
   content: ->
@@ -49,7 +49,7 @@ class DayCell
     """
       <td>
         #{placeholders}
-        #{events}
+        <strong>#{events}</strong>
         <br>
         _____ סְעִיף<span class='pull-right'>#{@gregorianDescription()}</span>
         <br>
