@@ -51,9 +51,9 @@ class DayCell
         #{placeholders}
         <strong>#{events}</strong>
         <br>
-        _____ סְעִיף<span class='pull-right'>#{@gregorianDescription()}</span>
+        _____ סִימָן<span class='pull-right'>#{@gregorianDescription()}</span>
         <br>
-        _____ סִימָן<span class='pull-right'>#{@hebrewDescription()}</span>
+        _____ סְעִיף<span class='pull-right'>#{@hebrewDescription()}</span>
       </td>
     """
 
