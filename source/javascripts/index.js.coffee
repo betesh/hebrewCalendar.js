@@ -1,3 +1,4 @@
+//= require 'vendor/hebrewDate'
 //= require 'hebrewCalendar'
 //= require 'dayCell'
 
