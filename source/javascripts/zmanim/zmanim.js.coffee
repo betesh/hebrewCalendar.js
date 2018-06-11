@@ -12,6 +12,7 @@ class Zmanim
     @gregorianDate = moment(gregorianDate).toDate()
     @gregorianDate.setHours(12)
     @zmanim = SunCalc.getTimes(@gregorianDate, coordinates.latitude, coordinates.longitude)
+  shaaZemani: shaaZemani
   shaaZemaniGra: (hour) ->
     beginningOfDay = moment(@zmanim.sunrise)
     lengthOfDay = (@zmanim.sunset - @zmanim.sunrise) / 1000
