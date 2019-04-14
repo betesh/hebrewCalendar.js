@@ -113,8 +113,11 @@ class DayCell
       minchaKetana = zmanim.shaaZemaniGra(9.5).seconds(0).format("h:mm")
       list.push("סס\"ב: #{minchaKetana}")
     if (!@hebrewDate.isShabbat() && !@hebrewDate.isYomKippur() && !@hebrewDate.isErebYomKippur() && !@hebrewDate.isErebYomTob() && !@hebrewDate.isYomTob()) || @hebrewDate.is6thDayOfPesach() || (@hebrewDate.yomYobThatWePrayAtPlag() && !@hebrewDate.isShabbat())
-      plag = zmanim.plag().seconds(60).format("h:mm")
-      list.push("פלג: #{plag}")
+      plag1 = zmanim.plag().seconds(60).format("h:mm")
+      beginningOfDay = moment(zmanim.zmanim.sunrise).subtract(72, 'minutes')
+      lengthOfDay = (zmanim.zmanim.setHaKochabim - beginningOfDay) / 1000
+      plag2 = zmanim.shaaZemani(beginningOfDay, lengthOfDay, 10.75).seconds(60).millisecond(0).format("h:mm")
+      list.push("פלג: #{plag1} / #{plag2}")
     sunset = zmanim.sunset().seconds(0).format("h:mm")
     list.push("שְׁקִיעָה: #{sunset}")
     if @hebrewDate.isTaanit() || @hebrewDate.omer()?.tonight? || @hebrewDate.hasHadlakatNerotHanukah() || @hebrewDate.isErebPurim()

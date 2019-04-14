@@ -15,9 +15,9 @@ COORDINATES =
 
 Weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'שַׁבָּת']
 
-advance = (hebrewDate) ->
+advance = (hebrewDate, days = 1) ->
   gregorianDate = hebrewDate.gregorianDate
-  gregorianDate.setDate(gregorianDate.getDate() + 1)
+  gregorianDate.setDate(gregorianDate.getDate() + days)
   new HebrewDate(gregorianDate)
 
 headerRow = -> "<tr>#{("<th>#{day}</th>" for day in Weekdays).join('')}</tr>"
