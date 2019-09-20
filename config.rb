@@ -65,5 +65,8 @@ end
 
 activate :sprockets
 
+caching_policy 'text/html', max_age: 0, must_revalidate: true
+default_caching_policy max_age: 60*60*24*365
+
 require 'webrick'
 WEBrick::HTTPRequest.const_set("MAX_URI_LENGTH", 10240)
