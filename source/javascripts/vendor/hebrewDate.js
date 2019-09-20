@@ -56,7 +56,7 @@
     };
 
     HachrazatRoshChodesh.prototype.moladAnnouncement = function() {
-      return "The מוֹלַד of חֹדֶשׁ " + this.name + " will be on " + this.dayOfMolad + " at " + this.moladTime + " and " + this.moladHalakim + " " + (1 === this.moladHalakim ? "חֵלֶק" : "חָלָקִים");
+      return "The מוֹלַד of חֹדֶשׁ " + this.name + " will be on " + this.dayOfMolad + " at " + this.moladTime + " & " + this.moladHalakim + " " + (1 === this.moladHalakim ? "חֵלֶק" : "חָלָקִים");
     };
 
     return HachrazatRoshChodesh;
