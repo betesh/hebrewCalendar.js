@@ -1,6 +1,6 @@
-//= require 'vendor/hebrewDate'
-//= require 'hebrewCalendar'
-//= require 'dayCell'
+#= require 'vendor/hebrewDate'
+#= require 'hebrewCalendar'
+#= require 'dayCell'
 
 ROWS_PER_PAGE = 2
 ROWS_PER_CELL = 9

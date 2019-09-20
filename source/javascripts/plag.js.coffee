@@ -1,8 +1,8 @@
-//= require 'vendor/hebrewDate'
-//= require 'hebrewCalendar'
+#= require 'vendor/hebrewDate'
+#= require 'hebrewCalendar'
 
-//= require 'hebrewDateExtensions'
-//= require 'zmanim/zmanim'
+#= require 'hebrewDateExtensions'
+#= require 'zmanim/zmanim'
 
 maximums = {}
 

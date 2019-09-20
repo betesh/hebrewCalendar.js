@@ -1,11 +1,11 @@
-//= require 'hebrewEvents'
-//= require 'hebrewDateExtensions'
-//= require 'anniversary'
-//= require 'birthdays'
-//= require 'yahrzeits'
-//= require 'hachrazatTaanit'
-//= require 'zmanim/zmanim'
-//= require 'zmanim/sunrise'
+#= require 'hebrewEvents'
+#= require 'hebrewDateExtensions'
+#= require 'anniversary'
+#= require 'birthdays'
+#= require 'yahrzeits'
+#= require 'hachrazatTaanit'
+#= require 'zmanim/zmanim'
+#= require 'zmanim/sunrise'
 
 class DayCell
   constructor: (hebrewDate, rowsPerCell, showLessDetailedEvents, zmanimOnly, coordinates) ->
