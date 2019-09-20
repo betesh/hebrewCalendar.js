@@ -47,3 +47,6 @@ configure :build do
 end
 
 activate :sprockets
+
+require 'webrick'
+WEBrick::HTTPRequest.const_set("MAX_URI_LENGTH", 10240)
