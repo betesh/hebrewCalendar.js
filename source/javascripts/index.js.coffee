@@ -9,9 +9,11 @@ COORDINATES =
   baltimore:
     latitude: 39.36
     longitude: -76.7
+    timezone: "America/New_York"
   boston:
     latitude: 42.346
     longitude: -71.152
+    timezone: "America/New_York"
 
 Weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'שַׁבָּת']
 
@@ -48,7 +50,9 @@ updateCalendar = ->
     html += "<td></td>"
   weeks = 0
   while hebrewDate.getYearFromCreation() == selectedYear
-    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL, showLessDetailedEvents, zmanimOnly, COORDINATES.baltimore)
+    coordinates = COORDINATES.baltimore
+    moment.tz.setDefault(coordinates.timezone)
+    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL, showLessDetailedEvents, zmanimOnly, coordinates)
     html += dayCell.content()
     if hebrewDate.isShabbat()
       weeks += 1
