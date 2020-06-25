@@ -13,6 +13,8 @@
     = javascript_include_tag  "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
     = javascript_include_tag current_page.path.gsub(/\.html\z/, '')
     :javascript
-      $(function(){ moment.locale('en'); });
+      $(function(){
+        moment.locale('en');
+      });
   %body{class: page_classes}
     = yield
