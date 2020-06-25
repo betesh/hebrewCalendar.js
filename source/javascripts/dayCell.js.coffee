@@ -8,12 +8,13 @@
 #= require 'zmanim/sunrise'
 
 class DayCell
-  constructor: (hebrewDate, rowsPerCell, showLessDetailedEvents, zmanimOnly, coordinates) ->
+  constructor: (hebrewDate, rowsPerCell, showLessDetailedEvents, zmanimOnly, coordinates, city) ->
     @hebrewDate = hebrewDate
     @rowsPerCell = rowsPerCell
     @showLessDetailedEvents = showLessDetailedEvents
     @zmanimOnly = zmanimOnly
     @coordinates = coordinates
+    @city = city
   sedra: -> @_sedra ?= (
     if @hebrewDate.isShabbat()
       unless @hebrewDate.isRegel() || @hebrewDate.isYomKippur() || @hebrewDate.isYomTob()
@@ -93,7 +94,7 @@ class DayCell
     list.push("עֲהַ\"שַּׁ: #{alotHaShahar}")
     misheyakir = zmanim.earliestTallit().seconds(60).format("h:mm")
     list.push("מִשֶּׁיַכִּיר: #{misheyakir}")
-    sunrise = (new Sunrise(@hebrewDate)?.time() ? zmanim.sunrise()).format("h:mm:ss")
+    sunrise = (new Sunrise(@hebrewDate, @city)?.time() ? zmanim.sunrise()).format("h:mm:ss")
     list.push("עֲמִידָה: #{sunrise}")
     sofZmanKeriatShema = zmanim.sofZmanKeriatShema().seconds(0).format("h:mm")
     list.push("סזק\"שׁ: #{sofZmanKeriatShema}")

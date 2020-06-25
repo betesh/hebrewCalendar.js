@@ -62,7 +62,7 @@ updateCalendar = ->
     html += "<td></td>"
   weeks = 0
   while hebrewDate.getYearFromCreation() == selectedYear
-    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL, showLessDetailedEvents, zmanimOnly, SELECTED_COORDINATES)
+    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL, showLessDetailedEvents, zmanimOnly, SELECTED_COORDINATES, CITY)
     html += dayCell.content()
     if hebrewDate.isShabbat()
       weeks += 1
