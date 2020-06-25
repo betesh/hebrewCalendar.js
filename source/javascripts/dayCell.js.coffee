@@ -94,8 +94,13 @@ class DayCell
     list.push("עֲהַ\"שַּׁ: #{alotHaShahar}")
     misheyakir = zmanim.earliestTallit().seconds(60).format("h:mm")
     list.push("מִשֶּׁיַכִּיר: #{misheyakir}")
-    sunrise = (new Sunrise(@hebrewDate, @city)?.time() ? zmanim.sunrise()).format("h:mm:ss")
-    list.push("עֲמִידָה: #{sunrise}")
+    sunrise = new Sunrise(@hebrewDate, @city)?.time()
+    if sunrise?
+      sunrise = sunrise.format("h:mm:ss")
+      list.push("עֲמִידָה: #{sunrise}")
+    else
+      sunrise = zmanim.sunrise().format("h:mm:ss")
+      list.push("עֲמִידָה: #{sunrise} (SunCalc)")
     sofZmanKeriatShema = zmanim.sofZmanKeriatShema().seconds(0).format("h:mm")
     list.push("סזק\"שׁ: #{sofZmanKeriatShema}")
     sofZmanTefila = zmanim.shaaZemaniMagenAbrahamDegrees(4).seconds(0).format("h:mm")
