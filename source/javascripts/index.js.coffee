@@ -15,6 +15,14 @@ COORDINATES =
     longitude: -71.152
     timezone: "America/New_York"
 
+window.CITY = (
+  ->
+    params = new URLSearchParams(location.search)
+    if params.has('city') then params.get('city') else 'baltimore'
+  )()
+
+window.SELECTED_COORDINATES = COORDINATES[CITY]
+
 Weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'שַׁבָּת']
 
 advance = (hebrewDate, days = 1) ->
@@ -50,9 +58,7 @@ updateCalendar = ->
     html += "<td></td>"
   weeks = 0
   while hebrewDate.getYearFromCreation() == selectedYear
-    coordinates = COORDINATES.baltimore
-    moment.tz.setDefault(coordinates.timezone)
-    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL, showLessDetailedEvents, zmanimOnly, coordinates)
+    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL, showLessDetailedEvents, zmanimOnly, SELECTED_COORDINATES)
     html += dayCell.content()
     if hebrewDate.isShabbat()
       weeks += 1
@@ -85,6 +91,7 @@ updateCalendar = ->
     $('#calendar').html tables.join(dividerRow())
 
 $ ->
+  moment.tz.setDefault(SELECTED_COORDINATES.timezone)
   window.hebrewCalendar = new HebrewCalendar(updateCalendar)
   hebrewCalendar.populateSelect()
   hebrewCalendar.$yearSelect.change()
