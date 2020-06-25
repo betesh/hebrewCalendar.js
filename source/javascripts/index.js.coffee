@@ -14,6 +14,10 @@ COORDINATES =
     latitude: 42.346
     longitude: -71.152
     timezone: "America/New_York"
+  mexicoCity:
+    latitude: 19.434
+    longitude: -99.1975
+    timezone: "America/Mexico_City"
 
 window.CITY = (
   ->

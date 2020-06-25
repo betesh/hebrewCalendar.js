@@ -20,7 +20,7 @@ class DayCell
         @hebrewDate.sedra().replace(/-/g, ' - ')
   )
   hebrewDescription: -> @_hebrewDescription ?= "#{@hebrewDate.staticHebrewMonth.name} #{@hebrewDate.dayOfMonth}"
-  gregorianDescription: -> @_gregorianDescription ?= moment(@hebrewDate.gregorianDate).format("D MMMM")
+  gregorianDescription: -> @_gregorianDescription ?= moment(@hebrewDate.gregorianDate).tz(moment.tz.guess()).format("D MMMM")
   eventList: -> @_eventList ?= (
     list = []
     events = $.extend({}, HebrewEvents)
