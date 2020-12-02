@@ -9,17 +9,18 @@
 
   HachrazatRoshChodesh = (function() {
     function HachrazatRoshChodesh(hebrew_date) {
-      var dayOfWeek1, dayOfWeek1Index, dayOfWeek30, hebrewYear, is2Days, molad, moladHours, moladMinutes, monthIndex, months, pm, yesterday;
+      var dayOfWeek1, dayOfWeek1Index, dayOfWeek30, hachrazahIsSameDayAsMolad, hebrewYear, is2Days, molad, moladHours, moladIsWeekBeforeRoshHodesh, moladMinutes, monthIndex, months, pm, roshHashana, yesterday;
       hebrewYear = hebrew_date.getHebrewYear();
       months = HebrewMonth.MONTHS.ofYear(hebrewYear);
       monthIndex = months.indexOf(hebrew_date.staticHebrewMonth) + 1;
-      if (months.length == monthIndex) {
-        hebrewYear = hebrew_date.getHebrewYear().getNextRoshHashana().getHebrewYear();
-        months = HebrewMonth.MONTHS.ofYear(hebrewYear);
-        monthIndex = 0;
+      if (monthIndex >= months.length) {
+        monthIndex = monthIndex % months.length;
+        roshHashana = hebrewYear.getNextRoshHashana();
+      } else {
+        roshHashana = hebrewYear.getThisRoshHashana();
       }
       this.name = months[monthIndex].name;
-      molad = hebrewYear.getThisRoshHashana().getMolad().advance(monthIndex);
+      molad = roshHashana.getMolad().advance(monthIndex);
       moladHours = molad.getHours() - 6;
       yesterday = moladHours < 0;
       pm = yesterday || moladHours >= 12;
@@ -45,6 +46,18 @@
       dayOfWeek1 = HEBREW_DAYS[dayOfWeek1Index];
       dayOfWeek30 = HEBREW_DAYS[(dayOfWeek1Index + 6) % 7];
       this.fullDayOfWeekPhrase = "בְּיוֹם " + (is2Days ? dayOfWeek30 + " וּבְיוֹם " : "") + dayOfWeek1;
+      moladIsWeekBeforeRoshHodesh = dayOfWeek1Index < molad.getDay() && dayOfWeek1Index >= (is2Days ? 1 : 0);
+      hachrazahIsSameDayAsMolad = "שַּׁבָּת" === this.dayOfMolad && moladIsWeekBeforeRoshHodesh;
+      this.verb = (function() {
+        switch (false) {
+          case !hachrazahIsSameDayAsMolad:
+            return "is [today]";
+          case !moladIsWeekBeforeRoshHodesh:
+            return "was on";
+          default:
+            return "will be on";
+        }
+      })();
     }
 
     HachrazatRoshChodesh.prototype.sephardicAnnouncement = function() {
@@ -56,7 +69,7 @@
     };
 
     HachrazatRoshChodesh.prototype.moladAnnouncement = function() {
-      return "The מוֹלַד of חֹדֶשׁ " + this.name + " will be on " + this.dayOfMolad + " at " + this.moladTime + " & " + this.moladHalakim + " " + (1 === this.moladHalakim ? "חֵלֶק" : "חָלָקִים");
+      return "The מוֹלַד of חֹדֶשׁ " + this.name + " " + this.verb + " " + this.dayOfMolad + " at " + this.moladTime + " and " + this.moladHalakim + " " + (1 === this.moladHalakim ? "חֵלֶק" : "חָלָקִים");
     };
 
     return HachrazatRoshChodesh;
@@ -362,7 +375,7 @@
     };
 
     HebrewDate.prototype.weekOfYear = function() {
-      return parseInt((this.dayOfYear + 4 - this.gregorianDate.getDay()) / 7) + 1;
+      return parseInt((this.dayOfYear + 11 - this.gregorianDate.getDay()) / 7) + (6 === this.hebrewYear.getThisRoshHashana().getGregorianDate().getDay() ? 1 : 0);
     };
 
     HebrewDate.prototype.occasions = function() {
@@ -843,7 +856,7 @@
       }
       switch (yearBeginsOn) {
         case 6:
-          this.sedrot.splice(0, 0, 'רֹאשׁ הַשָּׁנָה', 'הַאֲזִינוּ', 'חַג הַסֻּכּוֹת', 'שְּׁמִינִי עֲצֶרֶת');
+          this.sedrot.splice(0, 0, '', 'רֹאשׁ הַשָּׁנָה', 'הַאֲזִינוּ', 'חַג הַסֻּכּוֹת', 'שְּׁמִינִי עֲצֶרֶת');
           break;
         case 4:
           this.sedrot.splice(0, 0, '', 'הַאֲזִינוּ', 'יוֹם הַכִּפֻּרִים', 'חַג הַסֻּכּוֹת');

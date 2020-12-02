@@ -37,7 +37,7 @@ class DayCell
       yesterday.setDate(yesterday.getDate() - 1)
       hachrazatRoshHodesh = new HachrazatRoshChodesh(new HebrewDate(yesterday))
       announcement = hachrazatRoshHodesh.moladAnnouncement()
-      announcement = announcement.replace(/The (מוֹלַד) of חֹדֶשׁ תִּשְׁרִי will be on/g, "$1:")
+      announcement = announcement.replace(/The (מוֹלַד) of חֹדֶשׁ תִּשְׁרִי (will be on)|(is \[today\])|(was on)/g, "$1:")
       list.push "<small class='no-wrap'>#{announcement}</small>"
     if @hebrewDate.isShabbatMevarechim()
       if @showLessDetailedEvents
@@ -45,7 +45,7 @@ class DayCell
       else
         hachrazatRoshHodesh = new HachrazatRoshChodesh(@hebrewDate)
         announcement = "#{hachrazatRoshHodesh.moladAnnouncement()}<br>#{hachrazatRoshHodesh.sephardicAnnouncement()}"
-        announcement = announcement.replace(/(will be on) /g, "$1<br>&nbsp;&nbsp;&nbsp;&nbsp;")
+        announcement = announcement.replace(/((will be on)|(is \[today\])|(was on)) /g, "$1<br>&nbsp;&nbsp;&nbsp;&nbsp;")
         announcement = announcement.replace(/(בְּסִימַן)/g, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$1")
         announcement = announcement.replace(/(רֹאשׁ חֹדֶשׁ) /g, "$1<br>&nbsp;&nbsp;&nbsp;&nbsp;")
         list.push "<small class='no-wrap'>#{announcement}</small>"
