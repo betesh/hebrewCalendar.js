@@ -1,3 +1,42 @@
+GIT
+  remote: https://github.com/middleman/middleman.git
+  revision: 00ae2d963e4b9bd3b93e16544c62fe17ab5ae36d
+  branch: 4.x
+  specs:
+    middleman (4.3.11)
+      coffee-script (~> 2.2)
+      haml (>= 4.0.5)
+      kramdown (>= 2.3.0)
+      middleman-cli (= 4.3.11)
+      middleman-core (= 4.3.11)
+    middleman-cli (4.3.11)
+      thor (>= 0.17.0, < 2.0)
+    middleman-core (4.3.11)
+      activesupport (>= 4.2, < 6.0)
+      addressable (~> 2.3)
+      backports (~> 3.6)
+      bundler (~> 2.0)
+      contracts (~> 0.13.0)
+      dotenv
+      erubis
+      execjs (~> 2.0)
+      fast_blank
+      fastimage (~> 2.0)
+      hamster (~> 3.0)
+      hashie (~> 3.4)
+      i18n (~> 0.9.0)
+      listen (~> 3.0.0)
+      memoist (~> 0.14)
+      padrino-helpers (~> 0.13.0)
+      parallel
+      rack (>= 1.4.5, < 2.1)
+      sassc (~> 2.0)
+      servolux
+      tilt (~> 2.0.9)
+      toml
+      uglifier (~> 3.0)
+      webrick
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -62,37 +101,6 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.7)
     map (6.6.0)
     memoist (0.16.2)
-    middleman (4.3.11)
-      coffee-script (~> 2.2)
-      haml (>= 4.0.5)
-      kramdown (>= 2.3.0)
-      middleman-cli (= 4.3.11)
-      middleman-core (= 4.3.11)
-    middleman-cli (4.3.11)
-      thor (>= 0.17.0, < 2.0)
-    middleman-core (4.3.11)
-      activesupport (>= 4.2, < 6.0)
-      addressable (~> 2.3)
-      backports (~> 3.6)
-      bundler
-      contracts (~> 0.13.0)
-      dotenv
-      erubis
-      execjs (~> 2.0)
-      fast_blank
-      fastimage (~> 2.0)
-      hamster (~> 3.0)
-      hashie (~> 3.4)
-      i18n (~> 0.9.0)
-      listen (~> 3.0.0)
-      memoist (~> 0.14)
-      padrino-helpers (~> 0.13.0)
-      parallel
-      rack (>= 1.4.5, < 3)
-      sassc (~> 2.0)
-      servolux
-      tilt (~> 2.0.9)
-      uglifier (~> 3.0)
     middleman-livereload (3.4.6)
       em-websocket (~> 0.5.1)
       middleman-core (>= 3.3)
@@ -125,9 +133,10 @@ GEM
     padrino-support (0.13.3.4)
       activesupport (>= 3.1)
     parallel (1.20.1)
+    parslet (1.8.2)
     public_suffix (4.0.6)
     racc (1.5.2)
-    rack (2.2.3)
+    rack (2.0.9)
     rack-livereload (0.3.17)
       rack
     rb-fsevent (0.10.4)
@@ -145,6 +154,8 @@ GEM
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    toml (0.2.0)
+      parslet (~> 1.8.0)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -159,7 +170,7 @@ PLATFORMS
 
 DEPENDENCIES
   haml
-  middleman (>= 4.0.0)
+  middleman!
   middleman-livereload
   middleman-s3_sync
   middleman-sprockets (= 4.1.0)
