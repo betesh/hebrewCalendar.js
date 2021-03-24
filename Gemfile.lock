@@ -152,6 +152,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
+    webrick (1.7.0)
 
 PLATFORMS
   ruby
@@ -165,9 +166,10 @@ DEPENDENCIES
   sprockets (= 4.0.0.beta10)
   tzinfo-data
   wdm (~> 0.1.0)
+  webrick
 
 RUBY VERSION
-   ruby 2.6.0p0
+   ruby 3.0.0p0
 
 BUNDLED WITH
-   1.17.2
+   2.2.15

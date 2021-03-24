@@ -2,7 +2,7 @@
 # the following line to use 'http://'
 source 'https://rubygems.org'
 
-ruby "2.6.0"
+ruby "3.0.0"
 
 # For faster file watcher updates on Windows:
 gem 'wdm', '~> 0.1.0', platforms: [:mswin, :mingw]
@@ -19,3 +19,4 @@ gem 'middleman-sprockets', '= 4.1.0'
 gem 'middleman-s3_sync'
 
 gem 'sprockets', '= 4.0.0.beta10'
+gem 'webrick'
