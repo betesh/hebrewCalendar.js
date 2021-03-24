@@ -97,7 +97,7 @@ updateCalendar = ->
     coordinates = COORDINATES[CITY]
     moment.tz.setDefault(coordinates.timezone)
     hebrewDate = advance(hebrewDate) until moment(hebrewDate.gregorianDate).isDST()
-    hebrewDate = advance(hebrewDate) until hebrewDate.isErebShabbat() || hebrewDate.is6thDayOfPesach()
+    hebrewDate = advance(hebrewDate) until (hebrewDate.isErebShabbat() && !hebrewDate.isErebYomTob()) || hebrewDate.is6thDayOfPesach()
     if hebrewDate.gregorianDate.getFullYear() == selectedYear && moment(hebrewDate.gregorianDate).isDST()
       dayCell = new PlagCell(hebrewDate, ROWS_PER_CELL, coordinates)
       html += dayCell.content()
