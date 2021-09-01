@@ -117,7 +117,7 @@ class DayCell
     if (@hebrewDate.isErebShabbat() && !@hebrewDate.is10Tevet()) || @hebrewDate.isErebYomTob() || @hebrewDate.is1stDayOfYomTob()
       samuchLeminchaKetana = zmanim.samuchLeminchaKetana().seconds(0).format("h:mm")
       list.push("סז\"ס: #{samuchLeminchaKetana}")
-    if (@hebrewDate.isErebShabbat() || @hebrewDate.isErebYomKippur() || @hebrewDate.isErebYomTob()) && !@hebrewDate.isShabbat() && !@hebrewDate.isYomTob()
+    if (@hebrewDate.isErebShabbat() || @hebrewDate.isErebYomKippur() || @hebrewDate.isErebYomTob()) && !@hebrewDate.isShabbat() && !@hebrewDate.isYomTob() && !@hebrewDate.isPurim() && !@hebrewDate.isErebPesach() && !@hebrewDate.isMoed()
       minchaKetana = zmanim.shaaZemaniGra(9.5).seconds(0).format("h:mm")
       list.push("סס\"ב: #{minchaKetana}")
     if (!@hebrewDate.isShabbat() && !@hebrewDate.isYomKippur() && !@hebrewDate.isErebYomKippur() && !@hebrewDate.isErebYomTob() && !@hebrewDate.isYomTob()) || @hebrewDate.is6thDayOfPesach() || (@hebrewDate.yomYobThatWePrayAtPlag() && !@hebrewDate.isShabbat())
