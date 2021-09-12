@@ -92,17 +92,18 @@ class DayCell
   zmanimList: -> @_zmanimList ?= (
     zmanim = new Zmanim(@hebrewDate.gregorianDate, @coordinates)
     list = []
-    alotHaShahar = zmanim.magenAbrahamDawn().format("h:mm:ss")
-    list.push("עֲהַ\"שַּׁ: #{alotHaShahar}")
+    alotHaShaharFixedMinutes = moment(zmanim.zmanim.sunrise).subtract(72, 'minutes')
+    alotHaShaharDegrees = zmanim.magenAbrahamDawn()
+    alotHashahar = [alotHaShaharFixedMinutes, alotHaShaharDegrees]
+    list.push("עֲהַ\"שַּׁ: #{moment.min(alotHashahar).seconds(0).format("h:mm")} / #{moment.max(alotHashahar).seconds(60).format("h:mm")}")
     misheyakir = zmanim.earliestTallit().seconds(60).format("h:mm")
     list.push("מִשֶּׁיַכִּיר: #{misheyakir}")
-    sunrise = new Sunrise(@hebrewDate, @city)?.time()
-    if sunrise?
-      sunrise = sunrise.format("h:mm:ss")
-      list.push("עֲמִידָה: #{sunrise}")
-    else
-      sunrise = zmanim.sunrise().format("h:mm:ss")
-      list.push("עֲמִידָה: #{sunrise} (SunCalc)")
+    sunrise = zmanim.sunrise().format("h:mm:ss")
+    amidah = "#{sunrise}"
+    visibleSunrise = new Sunrise(@hebrewDate, @city)?.time()
+    amidah = "<small>#{amidah} בְּמִישׁוֹר / #{visibleSunrise.format("h:mm:ss")} נִרְאֶה</small>" if visibleSunrise?
+    amidah = "עֲמִידָה: #{amidah}"
+    list.push(amidah)
     sofZmanKeriatShema = zmanim.sofZmanKeriatShema().seconds(0).format("h:mm")
     list.push("סזק\"שׁ: #{sofZmanKeriatShema}")
     sofZmanTefila = zmanim.shaaZemaniMagenAbrahamDegrees(4).seconds(0).format("h:mm")
@@ -122,9 +123,8 @@ class DayCell
       list.push("סס\"ב: #{minchaKetana}")
     if (!@hebrewDate.isShabbat() && !@hebrewDate.isYomKippur() && !@hebrewDate.isErebYomKippur() && !@hebrewDate.isErebYomTob() && !@hebrewDate.isYomTob()) || @hebrewDate.is6thDayOfPesach() || (@hebrewDate.yomYobThatWePrayAtPlag() && !@hebrewDate.isShabbat())
       plag1 = zmanim.plag().seconds(60).format("h:mm")
-      beginningOfDay = moment(zmanim.zmanim.sunrise).subtract(72, 'minutes')
-      lengthOfDay = (zmanim.zmanim.setHaKochabim - beginningOfDay) / 1000
-      plag2 = zmanim.shaaZemani(beginningOfDay, lengthOfDay, 10.75).seconds(60).millisecond(0).format("h:mm")
+      lengthOfDay = (zmanim.zmanim.setHaKochabim - alotHaShaharFixedMinutes) / 1000
+      plag2 = zmanim.shaaZemani(alotHaShaharFixedMinutes, lengthOfDay, 10.75).seconds(60).millisecond(0).format("h:mm")
       list.push("פלג: #{plag1} / #{plag2}")
     sunset = zmanim.sunset().seconds(0).format("h:mm")
     list.push("שְׁקִיעָה: #{sunset}")
