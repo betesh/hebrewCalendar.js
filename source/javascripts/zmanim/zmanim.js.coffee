@@ -42,7 +42,7 @@ class Zmanim
       null
     else if hebrewDate.hasHadlakatNerotAfterSetHaKochabim()
       showEarlyTime = hebrewDate.yomYobThatWePrayAtPlag() && !hebrewDate.isShabbat()
-      "After #{moment.max(@setHaKochabim3Stars().seconds(60), moment(@sunset()).seconds(0).add('minutes', 46)).format('h:mm')}#{if showEarlyTime then "<small><br>(After #{moment(@plag()).seconds(60).format('h:mm')} / eat from all<br>cooked foods before #{moment(@sunset()).seconds(0).format('h:mm')})</small>" else ""}"
+      "After #{moment.max(@setHaKochabim3Stars().seconds(60), moment(@sunset()).seconds(0).add(46, 'minutes')).format('h:mm')}#{if showEarlyTime then "<small><br>(After #{moment(@plag()).seconds(60).format('h:mm')} / eat from all<br>cooked foods before #{moment(@sunset()).seconds(0).format('h:mm')})</small>" else ""}"
     else if hebrewDate.hasHadlakatNerot()
       showEarlyTime = hebrewDate.isErebShabbat() && ((@plag().isDST() && !hebrewDate.isErebKippur() && (!hebrewDate.isErebYomTob() || hebrewDate.isSixthDayOfPesach())) || hebrewDate.hasHadlakatNerotHanukah())
       "#{moment(@sunset()).subtract(18, 'minutes').seconds(0).format('h:mm')}#{if showEarlyTime then "<small><br>(Earliest: #{moment(@plag()).seconds(60).format('h:mm')})</small>" else ""}"

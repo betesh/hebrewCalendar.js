@@ -82,9 +82,9 @@ class DayCell
     if zmanim.hadlakatNerot()?
       list.push "<small>הַדְלַקָת נֵרות: </small>#{zmanim.hadlakatNerot()}"
     if (@hebrewDate.is2ndDayOfYomTob() && !@hebrewDate.isErebShabbat())
-      list.push "<small>זְמַן מְלָאכָה: </small>#{moment.max(zmanim.setHaKochabim3Stars().seconds(60), moment(zmanim.sunset()).seconds(0).add('minutes', 46)).format('h:mm')}"
+      list.push "<small>זְמַן מְלָאכָה: </small>#{moment.max(zmanim.setHaKochabim3Stars().seconds(60), moment(zmanim.sunset()).seconds(0).add(46, 'minutes')).format('h:mm')}"
     if @hebrewDate.isShabbat() || @hebrewDate.isYomKippur()
-      list.push "<small>זְמַן מְלָאכָה: </small>#{moment.max(zmanim.setHaKochabim3Stars().seconds(60), moment(zmanim.sunset()).seconds(0).add('minutes', 46)).format('h:mm')}/#{moment(zmanim.sunset()).add(72, 'minutes').seconds(60).format('h:mm')}"
+      list.push "<small>זְמַן מְלָאכָה: </small>#{moment.max(zmanim.setHaKochabim3Stars().seconds(60), moment(zmanim.sunset()).seconds(0).add(46, 'minutes')).format('h:mm')}/#{moment(zmanim.sunset()).add(72, 'minutes').seconds(60).format('h:mm')}"
     if @hebrewDate.isErebPesach() || @hebrewDate.is1stDayOfPesach()
       list.push "<small>חֲצוֹת: </small>#{zmanim.chatzot().seconds(0).format('h:mm')}"
     list
