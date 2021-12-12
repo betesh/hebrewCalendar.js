@@ -18,5 +18,5 @@ gem 'middleman-livereload'
 gem 'middleman-sprockets', '= 4.1.0'
 gem 'middleman-s3_sync'
 
-gem 'sprockets', '= 4.0.0.beta10'
+gem 'sprockets'
 gem 'webrick'
