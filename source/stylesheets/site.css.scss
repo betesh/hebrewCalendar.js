@@ -47,4 +47,19 @@
   td:first-child,  th:first-child {
     border-left: 1px dashed #555;
   }
+
+  .missing-berachot-line-adjustment {
+    font-size: xx-small;
+    overflow: auto;
+  }
+
+  .missing-berachot {
+    &.small {
+      font-size: unset;
+    }
+    color: red;
+    text-align: center;
+    font-size: x-large;
+    overflow: auto;
+  }
 }

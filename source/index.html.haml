@@ -2,15 +2,17 @@
   .row.text-center.screen-only
     .col-lg-10.col-lg-offset-1.col-xs-12
       .well.row.screen-only
-        .col-xs-2
+        .col-xs-1
           %select#year-select
         .col-xs-1
           %span#city
-        .col-xs-3
+        .col-xs-2
           %input#zmanim-only{type: :checkbox} Zmanim-only version
         .col-xs-3
           %input#collate{type: :checkbox} Print it so I can fold it in half into a book
         .col-xs-3
           %input#less-detailed-events{type: :checkbox} Show less detailed events
+        .col-xs-2
+          %input#berachot-100{type: :checkbox} 100-ברכות version
   .row.text-center
     .col-lg-10.col-lg-offset-1.col-xs-12#calendar
