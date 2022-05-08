@@ -18,11 +18,15 @@ COORDINATES =
     latitude: 19.434
     longitude: -99.1975
     timezone: "America/Mexico_City"
+  dallas:
+    latitude: 32.99
+    longitude: -96.79
+    timezone: "America/Chicago"
 
 window.CITY = (
   ->
     params = new URLSearchParams(location.search)
-    if params.has('city') then params.get('city') else 'baltimore'
+    if params.has('city') then params.get('city') else 'mexicoCity'
   )()
 
 window.SELECTED_COORDINATES = COORDINATES[CITY]
