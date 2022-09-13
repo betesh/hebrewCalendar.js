@@ -40,6 +40,10 @@ class DayCell
       announcement = hachrazatRoshHodesh.moladAnnouncement()
       announcement = announcement.replace(/The (מוֹלַד) of חֹדֶשׁ תִּשְׁרִי (will be on)|(is \[today\])|(was on)/g, "$1:")
       list.push "<small class='no-wrap'>#{announcement}</small>"
+    if @hebrewDate.isTefilatHaShelah() && @hebrewDate.isMaharHodesh()
+      list.splice list.indexOf(events["MaharHodesh"]), 1
+      list.splice list.indexOf(events["TefilatHaShelah"]), 1
+      list.unshift "#{events["TefilatHaShelah"]}&nbsp&nbsp&nbsp&nbsp&nbsp#{events["MaharHodesh"]}"
     if @hebrewDate.isShabbatMevarechim()
       if @showLessDetailedEvents
         list.push "שַׁבָּת מְבָרְכִים"
