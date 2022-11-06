@@ -13,7 +13,7 @@ gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 gem 'haml'
 
 # Middleman Gems
-gem 'middleman', '~> 4.4.0'
+gem 'middleman', github: 'middleman', branch: '4.x'
 gem 'middleman-livereload'
 gem 'middleman-sprockets', '= 4.1.0'
 gem 'middleman-s3_sync'
