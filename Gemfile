@@ -2,7 +2,7 @@
 # the following line to use 'http://'
 source 'https://rubygems.org'
 
-ruby "3.1.2"
+ruby "3.2.0"
 
 # For faster file watcher updates on Windows:
 gem 'wdm', '~> 0.1.0', platforms: [:mswin, :mingw]
@@ -10,13 +10,14 @@ gem 'wdm', '~> 0.1.0', platforms: [:mswin, :mingw]
 # Windows does not come with time zone data
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 
-gem 'haml'
+gem 'haml', '< 6'
+gem 'mime-types'
 
 # Middleman Gems
-gem 'middleman', github: 'middleman', branch: '4.x'
+gem 'middleman'
 gem 'middleman-livereload'
 gem 'middleman-sprockets', '= 4.1.0'
-gem 'middleman-s3_sync'
+gem 'middleman-s3_sync', github: 'fredjean/middleman-s3_sync'
 
 gem 'sprockets'
 gem 'webrick'
