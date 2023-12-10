@@ -132,7 +132,7 @@ class DayCell
       list.push("פלג: #{plag1} / #{plag2}")
     sunset = zmanim.sunset().seconds(0).format("h:mm")
     list.push("שְׁקִיעָה: #{sunset}")
-    if @hebrewDate.isTaanit() || @hebrewDate.omer()?.tonight? || @hebrewDate.hasHadlakatNerotHanukah() || @hebrewDate.isErebPurim()
+    if @hebrewDate.isTaanit() || @hebrewDate.omer()?.tonight? || (@hebrewDate.hasHadlakatNerotHanukah()  && !@hebrewDate.isShabbat())
       setHaKochabimGeonim = zmanim.setHaKochabimGeonim().seconds(60).format("h:mm")
       list.push("צהכ\"ג: #{setHaKochabimGeonim}")
     setHaKochabim3Stars = zmanim.setHaKochabim3Stars().seconds(60).format("h:mm")
