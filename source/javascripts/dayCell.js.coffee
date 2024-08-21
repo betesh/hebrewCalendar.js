@@ -57,7 +57,7 @@ class DayCell
     if !@showLessDetailedEvents && @hebrewDate.isHachrazatTaanit()
       list.push (new HachrazatTaanit(@hebrewDate)).announcement()
     if @hebrewDate.isAnniversary()
-      list.push "Anniversay"
+      list.push "Anniversary"
     for name, birthday of Birthdays
       if @hebrewDate.isBirthday(birthday)
         list.push "#{name}'s Birthday"
