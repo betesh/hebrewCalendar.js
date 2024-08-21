@@ -1,9 +1,8 @@
 #! /bin/bash
 
-RUBY_VERSION=$(cat .ruby-version)
 rm -rf build
-rvm ${RUBY_VERSION} do bundle exec middleman build
-if (rvm ${RUBY_VERSION} do bundle exec middleman s3_sync); then
+bundle exec middleman build
+if (bundle exec middleman s3_sync); then
   git tag -f deployed
   git push -f --tags
 fi
