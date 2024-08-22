@@ -82,7 +82,7 @@ class DayCell
     if @hebrewDate.isBiurHames()
       list.push "<small>Destroy #{if @hebrewDate.isErebPesach() then "all" else ""} חָמֵץ before </small>#{zmanim.latestTimeToOwnHametz().seconds(0).format('h:mm')}"
     if @hebrewDate.isShabbat() && (@hebrewDate.tonightIsYomTob())
-      list.push "<small>Start 'סְעוּדַת ג before </small>#{zmanim.samuchLeminchaKetana().seconds(0).format('h:mm')}"
+      list.push "<small>Finish 'סְעוּדַת ג before </small>#{zmanim.samuchLeminchaKetana().seconds(0).format('h:mm')}"
     if zmanim.hadlakatNerot()?
       list.push "<small>הַדְלַקָת נֵרות: </small>#{zmanim.hadlakatNerot()}"
     if (@hebrewDate.is2ndDayOfYomTob() && !@hebrewDate.isErebShabbat())
