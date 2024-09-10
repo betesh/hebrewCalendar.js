@@ -18,9 +18,9 @@ This is my solution.
 ### How
 
 1. Make sure Ruby is installed
-2. ````
-        $ cd hebrewCalendar.js && bundle install && middleman server
-        ````
+
+2. `$ cd hebrewCalendar.js && bundle install && middleman server`
+
 3. Visit localhost:4567/
 
     It will default to the current year, but you can select any year coming up soon,
@@ -32,11 +32,3 @@ This is my solution.
     Then fold it along the center and staple on the fold.
 
 5. Come back next year and print it again.
-
-### Customization
-
-For privacy reasons, the following files contains sampledata.  Customize them as you please:
-
-source/javascripts/anniversary.js.coffee
-source/javascripts/yahrzeits.js.coffee
-source/javascripts/birthdays.js.coffee
