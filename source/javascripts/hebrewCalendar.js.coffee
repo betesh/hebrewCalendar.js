@@ -4,12 +4,14 @@ class HebrewCalendar
     @$collate = $('#collate')
     @$lessDetailedEvents = $('#less-detailed-events')
     @$zmanimOnly = $('#zmanim-only')
+    @$shabbatYTOnly = $('#shabbat-and-yt-only')
     @$berachot100 = $('#berachot-100')
     @$yearSelect.change(callback)
     @$collate.change => @$yearSelect.change()
     @$lessDetailedEvents.change => @$yearSelect.change()
+    @$shabbatYTOnly.change => @$yearSelect.change()
     @$zmanimOnly.change =>
-      $('input[type="checkbox"]').not(@$zmanimOnly).closest('div').toggle(this.checked)
+      $('input[type="checkbox"]').not(@$zmanimOnly).not(@$shabbatYTOnly).closest('div').toggle(this.checked)
       @$yearSelect.change()
     @$berachot100.change =>
       $('input[type="checkbox"]').not(@$berachot100).closest('div').toggle(this.checked)

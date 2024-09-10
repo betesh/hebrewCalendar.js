@@ -8,7 +8,7 @@
 #= require 'zmanim/sunrise'
 
 class DayCell
-  constructor: (hebrewDate, rowsPerCell, showLessDetailedEvents, zmanimOnly, berachot100, coordinates, city) ->
+  constructor: (hebrewDate, rowsPerCell, showLessDetailedEvents, zmanimOnly, berachot100, coordinates, city, showDayOfWeek) ->
     @hebrewDate = hebrewDate
     @rowsPerCell = rowsPerCell
     @showLessDetailedEvents = showLessDetailedEvents
@@ -16,6 +16,7 @@ class DayCell
     @berachot100 = berachot100
     @coordinates = coordinates
     @city = city
+    @showDayOfWeek = showDayOfWeek
   sedra: -> @_sedra ?= (
     if @hebrewDate.isShabbat()
       unless @hebrewDate.isRegel() || @hebrewDate.isYomKippur() || @hebrewDate.isYomTob()
@@ -363,6 +364,7 @@ class DayCell
       placeholders = ""
     """
       <td>
+        #{if @showDayOfWeek && !@hebrewDate.isShabbat() then moment(@hebrewDate.gregorianDate).format('dddd') else ""}
         #{placeholders}
         #{events}
         <br>

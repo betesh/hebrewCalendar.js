@@ -42,10 +42,10 @@ headerRow = -> "<tr>#{("<th>#{day}</th>" for day in Weekdays).join('')}</tr>"
 
 dividerRow = -> "<p class='page-break-before'>&nbsp;</p>"
 
-wrappedInTable = (content, collate) ->
+wrappedInTable = (content, collate, showHeader) ->
   """
     <table class='table table-striped table-condensed'>
-      <#{if collate then "tbody class='thead'" else "thead"}>#{headerRow()}</thead>
+      #{if showHeader then "<#{if collate then "tbody class='thead'" else "thead"}>#{headerRow()}</thead>" else ""}
       <tbody>#{content}</tbody>
     </table>
   """
@@ -59,31 +59,38 @@ updateCalendar = ->
     !hebrewCalendar.$zmanimOnly.is(':checked') &&
     !hebrewCalendar.$berachot100.is(':checked')
   showLessDetailedEvents = hebrewCalendar.$lessDetailedEvents.is(':checked')
+  shabbatYTOnly = hebrewCalendar.$shabbatYTOnly.is(':checked')
   zmanimOnly = hebrewCalendar.$zmanimOnly.is(':checked')
   berachot100 = hebrewCalendar.$berachot100.is(':checked')
   hebrewDate =  new HebrewDate(new RoshHashana(selectedYear).getGregorianDate())
-  blankDays = hebrewDate.gregorianDate.getDay()
+  days = 1
   tables = []
   html = "<tr>"
-  while blankDays--
-    html += "<td></td>"
+  unless shabbatYTOnly
+    while days < hebrewDate.gregorianDate.getDay() + 1
+      html += "<td></td>"
+      days += 1
   weeks = 0
   while hebrewDate.getYearFromCreation() == selectedYear
-    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL, showLessDetailedEvents, zmanimOnly, berachot100, SELECTED_COORDINATES, CITY)
+    dayCell = new DayCell(hebrewDate, ROWS_PER_CELL, showLessDetailedEvents, zmanimOnly, berachot100, SELECTED_COORDINATES, CITY, shabbatYTOnly)
     html += dayCell.content()
-    if hebrewDate.isShabbat()
+    if days == 7
+      days = 0
       weeks += 1
       html += "</tr>"
       if collate && 0 == (weeks % ROWS_PER_PAGE)
-        tables.push wrappedInTable(html, collate)
+        tables.push wrappedInTable(html, collate, !shabbatYTOnly)
         html = ""
       html += "<tr>"
+    days += 1
     hebrewDate = advance(hebrewDate)
-  blankDays = 7 - hebrewDate.gregorianDate.getDay()
-  while blankDays--
+    if shabbatYTOnly
+      hebrewDate = advance(hebrewDate) until hebrewDate.isShabbat() || hebrewDate.isYomTob() || hebrewDate.isYomKippur()
+  while days < 8
     html += "<td></td>"
+    days += 1
   html += "</tr>"
-  html = wrappedInTable(html, collate)
+  html = wrappedInTable(html, collate, !shabbatYTOnly)
   if collate
     weeks += 1
     while (weeks % ROWS_PER_PAGE)
