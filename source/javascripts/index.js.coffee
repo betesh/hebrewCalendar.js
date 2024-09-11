@@ -85,7 +85,7 @@ updateCalendar = ->
     days += 1
     hebrewDate = advance(hebrewDate)
     if shabbatYTOnly
-      hebrewDate = advance(hebrewDate) until hebrewDate.isShabbat() || hebrewDate.isYomTob() || hebrewDate.isYomKippur()
+      hebrewDate = advance(hebrewDate) until hebrewDate.isShabbat() || hebrewDate.isYomTob() || hebrewDate.isYomKippur() || hebrewDate.isMoed()
   while days < 8
     html += "<td></td>"
     days += 1
