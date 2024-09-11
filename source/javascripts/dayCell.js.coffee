@@ -364,7 +364,7 @@ class DayCell
       placeholders = ""
     """
       <td>
-        #{if @showDayOfWeek && !@hebrewDate.isShabbat() then moment(@hebrewDate.gregorianDate).format('dddd') else ""}
+        #{if @showDayOfWeek then (if @hebrewDate.isShabbat() && @sedra() then @sedra() else (if @hebrewDate.isShabbat() then 'שַׁבָּת' else moment(@hebrewDate.gregorianDate).format('dddd'))) else ""}
         #{placeholders}
         #{events}
         <br>
