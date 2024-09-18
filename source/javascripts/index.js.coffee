@@ -5,23 +5,19 @@
 ROWS_PER_PAGE = 2
 ROWS_PER_CELL = 9
 
-COORDINATES =
-  baltimore:
-    latitude: 39.36
-    longitude: -76.7
-    timezone: "America/New_York"
-  boston:
-    latitude: 42.346
-    longitude: -71.152
-    timezone: "America/New_York"
-  mexicoCity:
-    latitude: 19.434
-    longitude: -99.1975
-    timezone: "America/Mexico_City"
-  dallas:
-    latitude: 32.99
-    longitude: -96.79
-    timezone: "America/Chicago"
+DALLAS =
+  latitude: 32.99
+  longitude: -96.79
+  timezone: "America/Chicago"
+
+window.COORDINATES = (
+  ->
+    params = new URLSearchParams(location.search)
+    if params.has('Coordinates')
+      JSON.parse(params.get('Coordinates'))
+    else
+      DALLAS
+  )()
 
 window.CITY = (
   ->
@@ -29,7 +25,7 @@ window.CITY = (
     if params.has('city') then params.get('city') else 'mexicoCity'
   )()
 
-window.SELECTED_COORDINATES = COORDINATES[CITY]
+window.SELECTED_COORDINATES = window.COORDINATES[CITY]
 
 Weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'שַׁבָּת']
 
