@@ -86,9 +86,10 @@ updateCalendar = ->
     hebrewDate = advance(hebrewDate)
     if shabbatYTOnly
       hebrewDate = advance(hebrewDate) until hebrewDate.isShabbat() || hebrewDate.isYomTob() || hebrewDate.isYomKippur() || hebrewDate.isMoed()
-  while days < 8
-    html += "<td></td>"
-    days += 1
+  if days > 1
+    while days < 8
+      html += "<td></td>"
+      days += 1
   html += "</tr>"
   html = wrappedInTable(html, collate, !shabbatYTOnly)
   if collate
