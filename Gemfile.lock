@@ -1,21 +1,3 @@
-GIT
-  remote: https://github.com/fredjean/middleman-s3_sync.git
-  revision: 7f542ec87024eb4cc39070b5f45b90958b78b6ec
-  specs:
-    middleman-s3_sync (4.6.1)
-      ansi (~> 1.5.0)
-      aws-sdk-cloudfront
-      aws-sdk-s3
-      base64
-      map
-      middleman-cli
-      middleman-core
-      mime-types (~> 3.1)
-      nokogiri (>= 1.18.4)
-      parallel
-      ruby-progressbar
-      unf
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -133,6 +115,19 @@ GEM
       em-websocket (~> 0.5.1)
       middleman-core (>= 3.3)
       rack-livereload (~> 0.6.1)
+    middleman-s3_sync (4.6.1)
+      ansi (~> 1.5.0)
+      aws-sdk-cloudfront
+      aws-sdk-s3
+      base64
+      map
+      middleman-cli
+      middleman-core
+      mime-types (~> 3.1)
+      nokogiri (>= 1.18.4)
+      parallel
+      ruby-progressbar
+      unf
     middleman-sprockets (4.1.0)
       middleman-core (~> 4.0)
       sprockets (>= 3.0)
@@ -191,7 +186,7 @@ DEPENDENCIES
   haml (< 6)
   middleman
   middleman-livereload
-  middleman-s3_sync!
+  middleman-s3_sync
   middleman-sprockets (= 4.1.0)
   mime-types
   mutex_m

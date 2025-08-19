@@ -18,4 +18,4 @@
 .DS_Store
 
 .ruby-env
-aws.yml
+.s3_sync
