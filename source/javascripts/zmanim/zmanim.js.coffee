@@ -1,8 +1,7 @@
-#= require ../vendor/suncalc
-
-SunCalc.addTime(-8.5, 'smallStars3', 'setHaKochabim')
-SunCalc.addTime(-16.1, 'magenAbrahamDawn', 'magenAbrahamDusk')
-SunCalc.addTime(-10.2, 'earliestTallit', 'dusk10_2')
+$ ->
+  SunCalc.addTime(-8.5, 'smallStars3', 'setHaKochabim')
+  SunCalc.addTime(-16.1, 'magenAbrahamDawn', 'magenAbrahamDusk')
+  SunCalc.addTime(-10.2, 'earliestTallit', 'dusk10_2')
 
 shaaZemani = (beginningOfDay, lengthOfDay, hour) ->
   beginningOfDay.add(lengthOfDay * hour / 12.0, 'seconds')
@@ -10,7 +9,6 @@ shaaZemani = (beginningOfDay, lengthOfDay, hour) ->
 class Zmanim
   constructor: (gregorianDate, coordinates) ->
     @gregorianDate = moment(gregorianDate).toDate()
-    @gregorianDate.setHours(12)
     @zmanim = SunCalc.getTimes(@gregorianDate, coordinates.latitude, coordinates.longitude)
   shaaZemani: shaaZemani
   shaaZemaniGra: (hour) ->
