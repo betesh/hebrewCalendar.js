@@ -97,6 +97,9 @@ class DayCell
   zmanimList: -> @_zmanimList ?= (
     zmanim = new Zmanim(@hebrewDate.gregorianDate, @coordinates)
     list = []
+    if @hebrewDate.isHoshanaRaba()
+      moon = SunCalc.getMoonTimes(@hebrewDate.gregorianDate, @coordinates.latitude, @coordinates.longitude)
+      list.push("Moonrise: #{moment(moon.rise).format("dd h:mma")}")
     alotHaShaharFixedMinutes = moment(zmanim.zmanim.sunrise).subtract(72, 'minutes')
     alotHaShaharDegrees = zmanim.magenAbrahamDawn()
     alotHashahar = [alotHaShaharFixedMinutes, alotHaShaharDegrees]
